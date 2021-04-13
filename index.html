@@ -61,8 +61,8 @@
                 }
             </style>
             <div style="text-align: center; margin:30px auto 30px auto">
-                <a href="https://coyoteleo.github.io/mturk/instruction.html" class="btn btn-primary" target="_blank"
-                    onclick="document.querySelector('#main').style.display='block'">View
+                <a id='instruction_btn' href="https://coyoteleo.github.io/mturk/instruction.html" class="btn btn-primary" target="_blank"
+                    onclick="document.querySelector('#main').style.display='block';document.querySelector('#instruction_btn').innerHTML='View instructions'">View
                     instructions before labeling</a>
                 <hr>
                 <div id="main" style="display: none;">
