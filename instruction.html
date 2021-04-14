@@ -72,8 +72,18 @@
                     </div>
                 </div>
                 <div>
-                    <h3>Annotation Steps</h3>
-                    There are two steps in this lebeling work:
+                    <h3>Annotation Description</h3>
+                    There are two parts in this lebeling work: Span Labeling & Group tagging
+                    <h5>Outline</h5>
+                    <div>
+                        1. Click 'View Instructions' and read the describtions in this page.<br>
+                        2. According to the detail rule below, start to label the spans.<br>
+                        3. Click "Start Group Tagging" and start tagging the groups.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;- There would pop up a floating box which allow you to tag the group via
+                        that.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;- The tagging result would be listed in the below.
+                    </div>
+                    <h5>Detail</h5>
                     <div style="display: flex;">
                         <div style="flex: none;">1. Label the spans&nbsp;:&nbsp;</div>
                         <div>Select the spans of life events in recalled and retold story, which are related to the
@@ -94,22 +104,21 @@
                                     something happened, otherwise, don't select the span, e.g.
                                     <div>
                                         <span class="example_sent">These cookies taste delicious.</span> ->
-                                        Imply that the author ate the
-                                        cookies.
+                                        Imply that the author ate the cookies.
                                     </div>
                                     <div>
-                                        <span class="example_sent">I like Chinesefood</span> -> Not imply any
-                                        event so that <span style="color: red;">don't</span> select these
+                                        <span class="example_sent">I like Chinese food</span> -> Not imply any
+                                        life event so that <span style="color: red;">don't</span> select these
                                         spans.
                                     </div>
                                     <div>
                                         <span class="example_sent">I’m tired of going to school.</span> -> Not
-                                        imply any event so that <span style="color: red;">don't</span> select
+                                        imply any life event so that <span style="color: red;">don't</span> select
                                         these spans.
                                     </div>
                                     <div>
                                         <span class="example_sent">It's a hot day.</span> -> Not
-                                        imply any event so that <span style="color: red;">don't</span> select
+                                        imply any life event so that <span style="color: red;">don't</span> select
                                         these spans.
                                     </div>
                                 </div>
@@ -132,7 +141,7 @@
                             </div>
                             <div style="display: flex;">
                                 <div style="flex: none;">5.&nbsp;</div>
-                                <div>It doesn't imply anything but relate to the event of the storys, e.g.
+                                <div>5W(When, Who, Where, What, Why) relate to the event of the storys, e.g.
                                     <div>
                                         (Summary: Me and my girlfriend went to the zoo on a hot day. We saw
                                         many animals like giraffes, gorillas, elephants, snakes,
@@ -144,7 +153,8 @@
                             </div>
                             <div style="display: flex;">
                                 <div style="flex: none;">7.&nbsp;</div>
-                                <div>In most cases, the below patterns are <span style="color: red;">illegal</span>.
+                                <div>In most cases, the below patterns<span style="color: red;">won't</span> be
+                                    selected.
                                     <div>
                                         <span class="example_sent">
                                             I feel...<br>
