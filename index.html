@@ -17,10 +17,10 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
                 crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.3/group.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.3/span_label.min.js"></script>
-            <!-- <script src="group.js"></script> -->
-            <!-- <script src="span_label.js"></script> -->
+            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.3/group.min.js"></script> -->
+            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.3/span_label.min.js"></script> -->
+            <script src="group.js"></script>
+            <script src="span_label.js"></script>
             <style>
                 .flex-container {
                     display: flex;
@@ -34,90 +34,157 @@
                     width: 48%;
                 }
 
-                .result {
-                    margin-top: 50px;
-                }
-
                 [class*="retold_mark"] {
                     background: lightgreen;
+                    padding: .1em;
                 }
 
                 [class*="recalled_mark"] {
                     background: lightskyblue;
+                    padding: .1em;
                 }
 
-                form>table>tr>td,
-                h4 {
-                    text-align: center;
+                table {
+                    table-layout: fixed;
+                }
+
+                .result {
+                    margin-top: 50px;
+                }
+
+                tr>td {
+                    vertical-align: baseline;
                 }
 
                 h3 {
                     margin-top: 30px;
                 }
 
-                .example_sent {
-                    font-style: italic;
-                    color: #808080;
+                input,
+                select {
+                    width: 100%;
                 }
             </style>
-            <div style="text-align: center; margin:30px auto 30px auto">
-                <a id='instruction_btn' href="https://coyoteleo.github.io/mturk/instruction.html" class="btn btn-primary" target="_blank"
-                    onclick="document.querySelector('#main').style.display='block';document.querySelector('#instruction_btn').innerHTML='View instructions'">View
-                    instructions before labeling</a>
+            <div style="text-align: center; margin:30px auto 200px auto">
+                <a id='instruction_btn' href="https://coyoteleo.github.io/mturk/instruction.html"
+                    class="btn btn-primary" target="_blank" onclick="start_spen_labeling()">View instructions before
+                    labeling</a>
                 <hr>
-                <div id="main" style="display: none;">
+                <div id="span_labeling" style="display: none;">
                     <div style="text-align: justify;">
                         <h4 style="text-align: center;">Summary</h4>
                         Me and my girlfriend went to the zoo on a hot day. We saw
                         many animals like giraffes, gorillas, elephants, snakes,
                         tigers, lions etc..
                     </div>
-                    <div class="flex-container">
-                        <div class="flex-item">
-                            <h4>Recalled story</h4>
-                            <div id='recalled'
-                                data-text="About a month ago me and my girlfriend went to the zoo. It was an unexpected trip we just decided to go on a random Wednesday. It was a pretty hot day that day considering it was the middle of July. As soon as we got in, we saw that there were some seals to the left of the entrance so we saw them for a few minutes. Then we went to the insect section of the zoo. There were so many of them like spiders, scorpions, also bigger animals like cobras, rattlesnakes stuff like that. Then we saw the elephants. It was pretty interesting because they were in an area that looked like a jungle and off in the distance we heard gorillas grunting. So we walked around until we found the gorillas and around there we also saw other kinds of primates like chimpanzees. We walked around a bit more and we stumbled upon all the other African animals like tigers, lions, giraffes etc. It was actually pretty cool to see the giraffes because one of them got really close to me. Along the way we saw a lot of different kinds of birds and small animals. We passed by the koalas and other Australian animals like Tasmanian devils, and kangaroos. I would have enjoyed it more though if we had gone on another day. It was really hot that day and we didn't really prepare for it. But I really enjoyed going there and we'll probably go again soon.">
-                            </div>
-                            <div id='recalled_result' class='result'></div>
-                        </div>
-                        <div class="flex-item">
-                            <h4>Retold story</h4>
-                            <div id='retold'
-                                data-text="Me and my girlfriend had gone to the Los Angeles Zoo. I can't exactly remember the day but I believe it was either April or May or maybe June. It was a hot day that day and it was spur of the moment trip. I honestly wasn't particularly excited to go but my girlfriend had been bugging me for months to go to the zoo so I finally said let's go. We got there around 10 or 11 in the morning and it was already around 90 degrees. When we walked in there was the insect/reptile section of the zoo so we saw many exotic looking spiders, snakes, scorpions etc. I liked it but my girlfriend didn't like insects. Then we walked in the African animals section. We saw elephants mostly and we could hear monkeys and apes in the distance somewhere. So we keep walking and eventually we find the apes. We saw gorillas hanging out in the shade and in a different section we saw other chimps and monkeys. We walked past that and we saw giraffes. Watching the giraffes was a cool site because they got really close to us. Like one of them was looking at me and came in my direction and I thought it would actually do something to me. Then after we saw the lions and they were mostly hanging out in the shade to stay out of the heat. We continued to walk around and we saw a section with Australian animals. So we managed to see koalas in the tress and tasmanian devils. I think we also saw kangaroos but I can't remember. We spent a lot of time at the zoo maybe around 5-6 hours. I think we left and we got back home around 4 or 5 pm.">
-                            </div>
-                            <div id='retold_result' class='result'></div>
-                        </div>
-                    </div>
-                    <hr>
+                    <table class='table'>
+                        <tr>
+                            <th style="width: 50%;">Recalled story</th>
+                            <th style="width: 0px;"></th>
+                            <th style="width: 50%;">Retold story</th>
+                        </tr>
+                        <tbody style="border-color: black;">
+                            <tr>
+                                <td id='recalled' style="text-align: justify;"
+                                    data-text="About a month ago me and my girlfriend went to the zoo. It was an unexpected trip we just decided to go on a random Wednesday. It was a pretty hot day that day considering it was the middle of July. As soon as we got in, we saw that there were some seals to the left of the entrance so we saw them for a few minutes. Then we went to the insect section of the zoo. There were so many of them like spiders, scorpions, also bigger animals like cobras, rattlesnakes stuff like that. Then we saw the elephants. It was pretty interesting because they were in an area that looked like a jungle and off in the distance we heard gorillas grunting. So we walked around until we found the gorillas and around there we also saw other kinds of primates like chimpanzees. We walked around a bit more and we stumbled upon all the other African animals like tigers, lions, giraffes etc. It was actually pretty cool to see the giraffes because one of them got really close to me. Along the way we saw a lot of different kinds of birds and small animals. We passed by the koalas and other Australian animals like Tasmanian devils, and kangaroos. I would have enjoyed it more though if we had gone on another day. It was really hot that day and we didn't really prepare for it. But I really enjoyed going there and we'll probably go again soon.">
+                                </td>
+                                <td></td>
+                                <td id='retold' style="text-align: justify;"
+                                    data-text="Me and my girlfriend had gone to the Los Angeles Zoo. I can't exactly remember the day but I believe it was either April or May or maybe June. It was a hot day that day and it was spur of the moment trip. I honestly wasn't particularly excited to go but my girlfriend had been bugging me for months to go to the zoo so I finally said let's go. We got there around 10 or 11 in the morning and it was already around 90 degrees. When we walked in there was the insect/reptile section of the zoo so we saw many exotic looking spiders, snakes, scorpions etc. I liked it but my girlfriend didn't like insects. Then we walked in the African animals section. We saw elephants mostly and we could hear monkeys and apes in the distance somewhere. So we keep walking and eventually we find the apes. We saw gorillas hanging out in the shade and in a different section we saw other chimps and monkeys. We walked past that and we saw giraffes. Watching the giraffes was a cool site because they got really close to us. Like one of them was looking at me and came in my direction and I thought it would actually do something to me. Then after we saw the lions and they were mostly hanging out in the shade to stay out of the heat. We continued to walk around and we saw a section with Australian animals. So we managed to see koalas in the tress and tasmanian devils. I think we also saw kangaroos but I can't remember. We spent a lot of time at the zoo maybe around 5-6 hours. I think we left and we got back home around 4 or 5 pm.">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id='recalled_result' class='result'></td>
+                                <td></td>
+                                <td id='retold_result' class='result'></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button id='group_btn' class="btn btn-primary" type="button" onclick="start_group_labeling()"
+                    style="display: none;">Start Group Labeling</button>
+                <div id="group_labeling" style="display: none;">
                     <div id='pair_form' novalidate style="width: 80%;margin: auto;">
-                        <table class='table' id='group_table'>
+                        <h4>Group Result</h4>
+                        <table class='table table-bordered'>
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 140px;">
-                                        <button class="btn btn-sm btn-success" onclick="add_group()" type="button">Add
-                                            new group</button>
-                                    </th>
-                                    <th scope="col" style="width: 150px;">Type</th>
-                                    <th scope="col">IDs</th>
-                                    <th scope="col" style="width: 60px;">Delete</th>
+                                    <th scope="col" style="width: 130px;">Type</th>
+                                    <th scope="col" style="calc(50% - 105px)">recalled IDs</th>
+                                    <th scope="col" style="calc(50% - 105px)">retold IDs</th>
+                                    <th scope="col" style="width: 80px;">Delete</th>
                                 </tr>
+                            </thead>
+                            <tbody id='group_table'>
+
+                            </tbody>
                         </table>
                     </div>
-
-                    <crowd-form>
-                        <crowd-text-area id="final_record" name="record" rows="4" style="display: none;">
-                        </crowd-text-area>
-                        <crowd-text-area id="final_group" name="group" rows="4" style="display: none;">
-                        </crowd-text-area>
-                        <label>Opinion</label>
-                        <crowd-text-area id="opinion" name="opinion"
-                            placeholder='There are something strange in the articles, ex: two article are totally different. '>
-                        </crowd-text-area>
-                    </crowd-form>
+                    <div novalidate
+                        style="width: 70%;z-index: 999;position: fixed;bottom: 5px;background: white;border: 2px black solid;left: 0;right: 0;margin: auto">
+                        <table class='table'>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 130px;">Type</th>
+                                    <th scope="col" style="calc(50% - 105px)">recalled IDs</th>
+                                    <th scope="col" style="calc(50% - 105px)">retold IDs</th>
+                                    <th scope="col" style="width: 80px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="has-validation">
+                                            <select id="type_selection" class="form-select" onchange="validate_group()">
+                                                <option disabled selected>--</option>
+                                                <option value="match">Match</option>
+                                                <option value="conflict">Conflict</option>
+                                                <option value="added">Added</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please select a valid type.</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="has-validation">
+                                            <input id="recalled_ids" type="text" class="form-control"
+                                                pattern="^\d+(,\d+)*$" placeholder="e.g. 1,2,5" data-id-type='recalled'
+                                                oninput="validate_group()">
+                                            <div class="invalid-feedback">Please fill the field with the correct
+                                                pattern.</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="has-validation">
+                                            <input id="retold_ids" type="text" class="form-control"
+                                                pattern="^\d+(,\d+)*$" placeholder="e.g. 1,2,5" data-id-type='retold'
+                                                oninput="validate_group()">
+                                            <div class="invalid-feedback">Please fill the field with the correct
+                                                pattern.</div>
+                                        </div>
+                                    </td>
+                                    <td><button type="button" class="btn btn-sm btn-success"
+                                            style="background-color: #198754" onclick="add_group()">Added</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <crowd-form>
+                            <crowd-text-area id="final_id" name="id" rows="4" style="display: none;">${recAgnPairId}
+                            </crowd-text-area>
+                            <crowd-text-area id="final_record" name="record" rows="4" style="display: none;">
+                            </crowd-text-area>
+                            <crowd-text-area id="final_group" name="group" rows="4" style="display: none;">
+                            </crowd-text-area>
+                            <h4>Opinion</h4>
+                            <crowd-text-area id="opinion" name="opinion"
+                                placeholder='There are something strange in the articles, ex: two article are totally different. '>
+                            </crowd-text-area>
+                        </crowd-form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>
