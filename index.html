@@ -17,10 +17,10 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
                 crossorigin="anonymous"></script>
-            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.3/group.min.js"></script> -->
-            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.3/span_label.min.js"></script> -->
-            <script src="group.js"></script>
-            <script src="span_label.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.4/group.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.4/span_label.min.js"></script>
+            <!-- <script src="group.js"></script> -->
+            <!-- <script src="span_label.js"></script> -->
             <style>
                 .flex-container {
                     display: flex;
@@ -102,7 +102,7 @@
                     </table>
                 </div>
                 <button id='group_btn' class="btn btn-primary" type="button" onclick="start_group_labeling()"
-                    style="display: none;">Start Group Labeling</button>
+                    style="display: none;">Start Group Tagging</button>
                 <div id="group_labeling" style="display: none;">
                     <div id='pair_form' novalidate style="width: 80%;margin: auto;">
                         <h4>Group Result</h4>
@@ -115,8 +115,7 @@
                                     <th scope="col" style="width: 80px;">Delete</th>
                                 </tr>
                             </thead>
-                            <tbody id='group_table'>
-
+                            <tbody id='group_result'>
                             </tbody>
                         </table>
                     </div>
