@@ -61,18 +61,28 @@
                         2. According to the detail rule below, start to label the spans.<br>
                         3. Click "Start Relation Tagging" and start tagging the relations.<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;- There would pop up a floating box which allow you to tag the relation
-                        via
-                        that.<br>
+                        via that.<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;- The tagging result would be listed in the below.
                     </div>
                     <h5>Detail</h5>
                     <div style="display: flex;">
                         <div style="flex: none;">1. Label the spans&nbsp;:&nbsp;</div>
                         <div>Select the spans of <span style="font-weight:bold">life events</span> of the author in
-                            recalled and retold story, which are
-                            related to the event of the summary, i.e. Any 5W(When, Who, Where, What, Why) about the
-                            event.
-                            <h5>WHAT is life events:</h5>
+                            recalled and retold story, which are related to the event of the summary, i.e. Any 5W(When,
+                            Who, Where, What, Why) about the event.
+                            <h5>WHAT is Span:</h5>
+                            The <span style="font-weight:bold">tightest</span> span in sentence that related to the life
+                            event, i.e. the span is a sub-sequence of sentence and there may be multiple spans in one
+                            sentence e.g.<br>
+                            <span class="example_sent">I can't exactly remember the day but I believe <span
+                                    style="background-color: yellow;">it was either
+                                    April or May or maybe June.</span></span>-> Only select the span that relate to the
+                            life event.<br>
+                            <span class="example_sent"><span style="background-color: yellow;">When we walked in there
+                                    was the insect/reptile section of the zoo</span> so <span
+                                    style="background-color: yellow;">we saw many exotic looking spiders, snakes,
+                                    scorpions etc.</span></span>-> There are two life events in one sentence.<br>
+                            <h5>WHAT is Life Events:</h5>
                             Life event means the sentence contains personal experiences about
                             <span style="font-weight:bold">“Who did What to Whom Where When and How.”</span>
                             <h5>WHAT kinds of life events need to be labeled:</h5>
@@ -81,7 +91,10 @@
                                 <div>The events related to personal experiences, e.g.
                                     <div>
                                         <span class="example_sent">I went to Salt Lake City on business with
-                                            Mr. Wang.</span>
+                                            Mr. Wang.</span><br>
+                                        <span class="example_sent">I think we also saw kangaroos but I can't
+                                            remember.</span>-> The event may not exactly happened so that <span
+                                            style="color: red;">don't</span> select these spans.
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +114,9 @@
                                         tigers, lions etc..)<br />
                                         <span class="example_sent">it was the middle of July.</span>-> It relates to the
                                         event.
+                                        <span class="example_sent">it was a pretty hot day.</span>-> It only describes
+                                        the environment but doesn't relates to the
+                                        event so that <span style="color: red;">don't</span> select these spans.
                                     </div>
                                 </div>
                             </div>
@@ -114,8 +130,12 @@
                                     </div>
                                     <div>
                                         <span class="example_sent">I like Chinese food</span> -> Only express personal
-                                        preference and not imply any life event so that <span
-                                            style="color: red;">don't</span> select these spans
+                                        preference so that <span style="color: red;">don't</span> select these spans
+                                    </div>
+                                    <div>
+                                        <span class="example_sent">I think you are cute.</span> -> Only express
+                                        someone's thoughts so that <span style="color: red;">don't</span>
+                                        select these spans.
                                     </div>
                                     <div>
                                         <span class="example_sent">I’m tired of going to school.</span> -> Not
@@ -137,7 +157,6 @@
                                         <span class="example_sent">
                                             I feel...<br>
                                             I like...<br>
-                                            I think...<br>
                                         </span>
                                     </div>
                                 </div>
