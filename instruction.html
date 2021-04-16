@@ -19,32 +19,13 @@
             integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
             crossorigin="anonymous"></script>
         <style>
-            .flex-container {
-                display: flex;
-                flex-direction: row;
-                margin-top: 30px;
-                justify-content: space-between;
-            }
-
-            .flex-item {
-                text-align: justify;
-                width: 48%;
-            }
-
-            [class*="retold_mark"] {
-                background: lightgreen;
-            }
-
-            [class*="recalled_mark"] {
-                background: lightskyblue;
-            }
-
-            h4 {
-                text-align: center;
-            }
-
             h3 {
                 margin-top: 30px;
+            }
+
+            h5 {
+                margin-top: 10px;
+                margin-bottom: 0;
             }
 
             .example_sent {
@@ -73,22 +54,28 @@
                 </div>
                 <div>
                     <h3>Annotation Description</h3>
-                    There are two parts in this lebeling work: Span Labeling & Group tagging
+                    There are two parts in this lebeling work: Span Labeling & Relation tagging
                     <h5>Outline</h5>
                     <div>
                         1. Click 'View Instructions' and read the describtions in this page.<br>
                         2. According to the detail rule below, start to label the spans.<br>
-                        3. Click "Start Group Tagging" and start tagging the groups.<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- There would pop up a floating box which allow you to tag the group via
+                        3. Click "Start Relation Tagging" and start tagging the relations.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;- There would pop up a floating box which allow you to tag the relation
+                        via
                         that.<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;- The tagging result would be listed in the below.
                     </div>
                     <h5>Detail</h5>
                     <div style="display: flex;">
                         <div style="flex: none;">1. Label the spans&nbsp;:&nbsp;</div>
-                        <div>Select the spans of life events in recalled and retold story, which are related to the
-                            event of the summary, i.e. Any 5W(When, Who, Where, What, Why) about the event
-                            <h5>WHAT is life events</h5>
+                        <div>Select the spans of <span style="font-weight:bold">life events</span> of the author in
+                            recalled and retold story, which are
+                            related to the event of the summary, i.e. Any 5W(When, Who, Where, What, Why) about the
+                            event.
+                            <h5>WHAT is life events:</h5>
+                            Life event means the sentence contains personal experiences about
+                            <span style="font-weight:bold">“Who did What to Whom Where When and How.”</span>
+                            <h5>WHAT kinds of life events need to be labeled:</h5>
                             <div style="display: flex;">
                                 <div style="flex: none;">1.&nbsp;</div>
                                 <div>The events related to personal experiences, e.g.
@@ -100,16 +87,35 @@
                             </div>
                             <div style="display: flex;">
                                 <div style="flex: none;">2.&nbsp;</div>
-                                <div>The sentences which express someone's thoughts or feelings implies that
-                                    something happened, otherwise, don't select the span, e.g.
+                                <div>About someone's personal information, e.g.
+                                    <div><span class="example_sent">I skipped fourth grade.</span></div>
+                                    <div><span class="example_sent">I live in Taiwan.</span></div>
+                                </div>
+                            </div>
+                            <div style="display: flex;">
+                                <div style="flex: none;">3.&nbsp;</div>
+                                <div>5W1H(When, Who, Where, What, Why, How) relate to the event of the storys.
+                                    <div>
+                                        (Summary: Me and my girlfriend went to the zoo on a hot day. We saw
+                                        many animals like giraffes, gorillas, elephants, snakes,
+                                        tigers, lions etc..)<br />
+                                        <span class="example_sent">it was the middle of July.</span>-> It relates to the
+                                        event.
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex;">
+                                <div style="flex: none;">4.&nbsp;</div>
+                                <div>The sentences which express someone's thoughts or feelings implies that something
+                                    happened, otherwise, don't select the span, e.g.
                                     <div>
                                         <span class="example_sent">These cookies taste delicious.</span> ->
-                                        Imply that the author ate the cookies.
+                                        Imply that the author ate the cookies so that please select this span.
                                     </div>
                                     <div>
-                                        <span class="example_sent">I like Chinese food</span> -> Not imply any
-                                        life event so that <span style="color: red;">don't</span> select these
-                                        spans.
+                                        <span class="example_sent">I like Chinese food</span> -> Only express personal
+                                        preference and not imply any life event so that <span
+                                            style="color: red;">don't</span> select these spans
                                     </div>
                                     <div>
                                         <span class="example_sent">I’m tired of going to school.</span> -> Not
@@ -124,43 +130,14 @@
                                 </div>
                             </div>
                             <div style="display: flex;">
-                                <div style="flex: none;">3.&nbsp;</div>
-                                <div>About someone's experience or information, e.g.
-                                    <div><span class="example_sent">I skipped fourth grade.</span></div>
-                                    <div><span class="example_sent">I live in Taiwan.</span></div>
-                                </div>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="flex: none;">4.&nbsp;</div>
-                                <div>Someone's habbit, e.g.
-                                    <div>
-                                        <span class="example_sent">I usually look at English language websites every
-                                            day and go to my local English Corner twice a week.</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: flex;">
                                 <div style="flex: none;">5.&nbsp;</div>
-                                <div>5W(When, Who, Where, What, Why) relate to the event of the storys, e.g.
-                                    <div>
-                                        (Summary: Me and my girlfriend went to the zoo on a hot day. We saw
-                                        many animals like giraffes, gorillas, elephants, snakes,
-                                        tigers, lions etc..)<br />
-                                        <span class="example_sent">It was a pretty hot day that day considering it
-                                            was the middle of July.</span>-> It relates to the event.
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="display: flex;">
-                                <div style="flex: none;">7.&nbsp;</div>
-                                <div>In most cases, the below patterns<span style="color: red;">won't</span> be
-                                    selected.
+                                <div><span style="color: red;">In most cases, the below patterns won't be
+                                        selected.</span>
                                     <div>
                                         <span class="example_sent">
                                             I feel...<br>
                                             I like...<br>
                                             I think...<br>
-                                            I remember...<br>
                                         </span>
                                     </div>
                                 </div>
@@ -168,48 +145,60 @@
                         </div>
                     </div>
                     <div style="display: flex;">
-                        <div style="flex: none;">2. Tag the spans&nbsp;:&nbsp;</div>
-                        <div>Tag the spans with three types, "Match", "Conflict" and "Add".
+                        <div style="flex: none;">2. Tag the relations&nbsp;:&nbsp;</div>
+                        <div>Tag the relations between the spans in the recalled and retold stories with three types,
+                            including <span style="font-weight: bold;">"Match", "Conflict" and "Add"</span>.
                             <div style="display: flex;">
-                                <div style="flex: none;">Match&nbsp;:&nbsp;</div>
+                                <div style="flex: none;font-weight: bold;">Match&nbsp;:&nbsp;</div>
                                 <div>The spans from both recalled story and retold story describe the same thing,
                                     and there are no conflicts between each other.<br>
                                     <span style="color: red;">Notice</span>: No matter which span describe in better
-                                    detail, we only concern that the spans are describing the same event.
+                                    detail, we only concern that the spans are describing the same life event.<br>
+                                    Take the green box of below picture for example, both spans from recalled and retold
+                                    story describe the life event about they found the gorillas, so that we tagged the
+                                    relation of these spans as "match".
                                 </div>
                             </div>
                             <div style="display: flex;">
-                                <div style="flex: none;">Conflict&nbsp;:&nbsp;</div>
-                                <div>In contrast to the "Match", The spans from both recalled story and retold story
-                                    describe the same thing,
-                                    ,but there are conflicts between each other.<br>
+                                <div style="flex: none;font-weight: bold;">Conflict&nbsp;:&nbsp;</div>
+                                <div>In contrast to "Match", "Conflict" means the events described in the spans from
+                                    both recalled story and retold story are inconsistent.<br>
+                                    Take the red box of below picture for example, the month of the date of same life
+                                    event is totally different, so that we tagged the relation of this ids pair as
+                                    "conflict".
                                 </div>
                             </div>
                             <div style="display: flex;">
-                                <div style="flex: none;">Added&nbsp;:&nbsp;</div>
-                                <div>If the event only appeared in the retold story, please tag the spans with
-                                    "Added".
+                                <div style="flex: none;font-weight: bold;">Added&nbsp;:&nbsp;</div>
+                                <div>If the life event only appeared in the retold story, please tag the spans with
+                                    "Added". In this case, only the spans in the retold story need to be tagged.<br>
+                                    Take the blue box of below picture for example, the time information of the life
+                                    event only appeared in the retold story, so that we tagged the relation as "added".
                                 </div>
                             </div>
                             <div>
-                                PS:
+                                Note that:
                                 <div style="display: flex;">
-
                                     <div style="flex: none;">1&nbsp;.&nbsp;</div>
-                                    <div>Each group may contain one, two or more span ids.</div>
+                                    <div>The mapping between the spans in the recalled and retold stories may be
+                                        one-to-one, one-to-many, many-to-one, or many-to-many to denote the relation
+                                        types of "Match" and "Conflict".<br>
+                                        For example,<br>
+                                        &nbsp;&nbsp;- one-to-many means one span in the recalled may be mapped to
+                                        multiple spans in the retold story.<br>
+                                        &nbsp;&nbsp;- Many-to-one means multiple spans in the recalled may be mapped to
+                                        one span in
+                                        the retold story.
+                                    </div>
                                 </div>
                                 <div style="display: flex;">
                                     <div style="flex: none;">2&nbsp;.&nbsp;</div>
-                                    <div>One span may be tag to multiple group, ex: A match with B, but A conflict
-                                        with C</div>
-                                </div>
-                                <div style="display: flex;">
-                                    <div style="flex: none;">3&nbsp;.&nbsp;</div>
-                                    <div>All labeled span of retold story should be tagged</div>
+                                    <div>All labeled spans of retold story should be tagged at least one relation type.
+                                    </div>
                                 </div>
                             </div>
                             Example result:
-                            <img src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.6/example.png" width="100%"
+                            <img src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.7/example.png" width="100%"
                                 style="border: 5px red solid;">
                         </div>
                     </div>
