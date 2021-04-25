@@ -32,6 +32,10 @@
                 font-style: italic;
                 color: #808080;
             }
+
+            table {
+                table-layout: fixed;
+            }
         </style>
         <div style="text-align: center; margin:30px auto 30px auto">
             <div style="text-align: left;">
@@ -82,6 +86,36 @@
                                     was the insect/reptile section of the zoo</span> so <span
                                     style="background-color: yellow;">we saw many exotic looking spiders, snakes,
                                     scorpions etc.</span></span>-> There are two life events in one sentence.<br>
+                            <span class="example_sent"><span style="background-color: yellow;">We walked in
+                                    insect/reptile section of the zoo and saw many exotic
+                                    looking spiders, snakes, scorpions etc.</span></span>-> There are two life events in
+                            one sentence, but the subject only appear once. In this case, you can just select the whole
+                            sentence. However, in the relation tagging part(detail listed below), you should consider
+                            that there are two
+                            different life event and tagging to different relations.
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td style="width:70px">relation</td>
+                                    <td>recalled</td>
+                                    <td>retold</td>
+                                </tr>
+                                <tr>
+                                    <td>match</td>
+                                    <td>We walked in
+                                        insect/reptile section of the zoo and saw many exotic
+                                        looking spiders, snakes, scorpions etc.</td>
+                                    <td>We entered the insction</td>
+                                </tr>
+                                <tr>
+                                    <td>match</td>
+                                    <td>We walked in
+                                        insect/reptile section of the zoo and saw many exotic
+                                        looking spiders, snakes, scorpions etc.</td>
+                                    <td>We saw many kinds of spiders</td>
+                                </tr>
+                            </table>
+                            <br>
+
                             <h5>WHAT is Life Events:</h5>
                             Life event means the sentence contains personal experiences about
                             <span style="font-weight:bold">“Who did What to Whom Where When and How.”</span>
@@ -171,11 +205,12 @@
                                 <div style="flex: none;font-weight: bold;">Match&nbsp;:&nbsp;</div>
                                 <div>The spans from both recalled story and retold story describe the same thing, and
                                     there are no conflicts between each other.<br>
-                                    <span style="color: red;">Notice</span>: No matter which span describe in better
-                                    detail, we only concern that the spans are describing the same life event.<br>
-                                    Take the green box of below picture for example, both spans from recalled and retold
-                                    storys describe the life event about they found the gorillas so that we tagged the
-                                    relation of these spans as "match".
+                                    <span style="font-weight: bold;"><span style="color: red;">Notice</span>: No matter
+                                        which span describe in better detail, we only concern that the spans are
+                                        describing the same life event.</span><br>
+                                    Take the green box of below picture for example, both spans from recalled and
+                                    retold storys describe the life event about they found the gorillas so that we
+                                    tagged the relation of these spans as "match".
                                 </div>
                             </div>
                             <div style="display: flex;">
@@ -215,12 +250,38 @@
                                     <div>All labeled spans of retold story should be tagged at least one relation type.
                                     </div>
                                 </div>
+                                <div style="display: flex;">
+                                    <div style="flex: none;">3&nbsp;.&nbsp;</div>
+                                    <div>Because the time gap between recalled story and retold story is greater than
+                                        half year, the relative time duration may be different, but relation might be
+                                        "Match". (Row1: relative time description; Row2: absolute time description)
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td style="width:70px">relation</td>
+                                                <td>recalled</td>
+                                                <td>retold</td>
+                                            </tr>
+                                            <tr>
+                                                <td>match</td>
+                                                <td>I had worked for it for 13 years.</td>
+                                                <td>I had worked forit for 14 years.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>conflict</td>
+                                                <td>We go the zoo in April.</td>
+                                                <td>It's happened in July. </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
                             </div>
-                            Example result:
-                            <img src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.8/example.png" width="100%"
-                                style="border: 5px red solid;">
+
                         </div>
                     </div>
+                    Example result:
+                    <img src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.8/example.png" width="100%"
+                        style="border: 5px red solid;">
                 </div>
             </div>
         </div>
