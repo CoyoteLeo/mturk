@@ -54,15 +54,15 @@
                 </div>
                 <div>
                     <h3>Annotation Description</h3>
-                    There are two parts in this lebeling work: Span Labeling & Relation tagging
+                    There are two parts in this lebeling work: Span Labeling and Relation Tagging
                     <h5>Outline</h5>
                     <div>
-                        1. Click 'View Instructions' and read the describtions in this page.<br>
+                        1. Click 'View Instructions' and read the descriptions on this page.<br>
                         2. According to the detail rule below, start to label the spans.<br>
                         3. Click "Start Relation Tagging" and start tagging the relations.<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- There would pop up a floating box which allow you to tag the relation
+                        &nbsp;&nbsp;&nbsp;&nbsp;- There would pop up a floating box that allows you to tag the relation
                         via that.<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;- The tagging result would be listed in the below.
+                        &nbsp;&nbsp;&nbsp;&nbsp;- The tagging result would be listed below.
                     </div>
                     <h5>Detail</h5>
                     <div style="display: flex;">
@@ -71,9 +71,9 @@
                             recalled and retold story, which are related to the event of the summary, i.e. Any 5W(When,
                             Who, Where, What, Why) about the event.
                             <h5>WHAT is Span:</h5>
-                            The <span style="font-weight:bold">tightest</span> span in sentence that related to the life
-                            event, i.e. the span is a sub-sequence of sentence and there may be multiple spans in one
-                            sentence e.g.<br>
+                            The <span style="font-weight:bold">tightest</span> span in the sentence that related to the
+                            life event, i.e. the span is a sub-sequence of a sentence and there may be
+                            multiple spans in one sentence. e.g.<br>
                             <span class="example_sent">I can't exactly remember the day but I believe <span
                                     style="background-color: yellow;">it was either
                                     April or May or maybe June.</span></span>-> Only select the span that relate to the
@@ -122,7 +122,7 @@
                             </div>
                             <div style="display: flex;">
                                 <div style="flex: none;">4.&nbsp;</div>
-                                <div>The sentences which express someone's thoughts or feelings implies that something
+                                <div>The sentences which express someone's thoughts or feelings imply that something
                                     happened, otherwise, don't select the span, e.g.
                                     <div>
                                         <span class="example_sent">These cookies taste delicious.</span> ->
@@ -169,22 +169,22 @@
                             including <span style="font-weight: bold;">"Match", "Conflict" and "Add"</span>.
                             <div style="display: flex;">
                                 <div style="flex: none;font-weight: bold;">Match&nbsp;:&nbsp;</div>
-                                <div>The spans from both recalled story and retold story describe the same thing,
-                                    and there are no conflicts between each other.<br>
+                                <div>The spans from both recalled story and retold story describe the same thing, and
+                                    there are no conflicts between each other.<br>
                                     <span style="color: red;">Notice</span>: No matter which span describe in better
                                     detail, we only concern that the spans are describing the same life event.<br>
                                     Take the green box of below picture for example, both spans from recalled and retold
-                                    story describe the life event about they found the gorillas, so that we tagged the
+                                    storys describe the life event about they found the gorillas so that we tagged the
                                     relation of these spans as "match".
                                 </div>
                             </div>
                             <div style="display: flex;">
                                 <div style="flex: none;font-weight: bold;">Conflict&nbsp;:&nbsp;</div>
                                 <div>In contrast to "Match", "Conflict" means the events described in the spans from
-                                    both recalled story and retold story are inconsistent.<br>
-                                    Take the red box of below picture for example, the month of the date of same life
-                                    event is totally different, so that we tagged the relation of this ids pair as
-                                    "conflict".
+                                    both recalled story and retold storys are inconsistent.<br>
+                                    Take the red box of below picture for example, the month of the same life
+                                    event from recalled and retold story are different, so that we tagged the relation
+                                    of this ids pair as "conflict".
                                 </div>
                             </div>
                             <div style="display: flex;">
