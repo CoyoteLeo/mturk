@@ -170,7 +170,7 @@
                         </table>
                     </div>
                     <div>
-                        <crowd-form>
+                        <crowd-form onsubmit="return validate_submit()">
                             <crowd-text-area id="final_id" name="id" rows="4" style="display: none;">${recAgnPairId}
                             </crowd-text-area>
                             <crowd-text-area id="final_record" name="record" rows="4" style="display: none;">
@@ -186,6 +186,24 @@
                 </div>
             </div>
         </div>
+        <script>
+            function validate_submit() {
+                const retold_ids = new Set(Object.keys(record.retold).map(x => parseInt(x)));
+                let tagged_ids = new Set();
+                for (const id in relations) {
+                    for (const i in relations[id]['retold_ids']) {
+                        tagged_ids = tagged_ids.add(parseInt(relations[id]['retold_ids'][i]));
+                    }
+                }
+                tagged_ids = Array.from(tagged_ids);
+                const lack_ids = Array.from(retold_ids).filter(x => !tagged_ids.includes(x));
+                if ((lack_ids).length != 0) {
+                    alert(`All span ids of retold story should be tagged with a relation, ${JSON.stringify(lack_ids)}`);
+                    return false;
+                }
+                return true;
+            }
+        </script>
 </body>
 
 </html>
