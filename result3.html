@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="ui container">
+        <div id="experiment" class="ui top aligned centered relaxed grid">
+            <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/mark.js/8.6.0/mark.min.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+                crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+                crossorigin="anonymous"></script>
+            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/relation.min.js"></script> -->
+            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/span_label.min.js"></script> -->
+            <script src="relation.js"></script>
+            <script src="span_label.js"></script>
+            <style>
+                .flex-container {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: 30px;
+                    justify-content: space-between;
+                }
+
+                .flex-item {
+                    text-align: justify;
+                    width: 48%;
+                }
+
+                [class*="retold_mark"] {
+                    background: lightgreen;
+                    padding: .1em;
+                }
+
+                [class*="recalled_mark"] {
+                    background: lightskyblue;
+                    padding: .1em;
+                }
+
+                table {
+                    table-layout: fixed;
+                }
+
+                .result {
+                    margin-top: 50px;
+                }
+
+                tr>td {
+                    vertical-align: baseline;
+                }
+
+                h3 {
+                    margin-top: 30px;
+                }
+
+                input,
+                select {
+                    width: 100%;
+                }
+            </style>
+            <div style="text-align: center; margin:30px auto 200px auto">
+                <a id='instruction_btn' href="https://coyoteleo.github.io/mturk/instruction.html"
+                    class="btn btn-primary" target="_blank" onclick="start_span_labeling()">View instructions before
+                    labeling</a>
+                <hr>
+                <div id="span_labeling">
+                    <div style="text-align: justify;">
+                        <h4 style="text-align: center;padding: 8px;">Summary</h4>
+                        This story is about a canoe float with grandpa. We had a great float trip with my dad but were
+                        saddened to realize how
+                        bad his Alzheimer's really is.
+                    </div>
+                    <table class='table'>
+                        <tr>
+                            <th style="width: 50%;">Recalled story</th>
+                            <th style="width: 10px;"></th>
+                            <th style="width: 50%;">Retold story</th>
+                        </tr>
+                        <tbody style="border-color: black;">
+                            <tr>
+                                <td id='recalled' style="text-align: justify;">
+                                </td>
+                                <td></td>
+                                <td id='retold' style="text-align: justify;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id='recalled_result' class='result'></td>
+                                <td></td>
+                                <td id='retold_result' class='result'></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button id='relation_btn' class="btn btn-primary" type="button" onclick="start_relation_tagging()"
+                    style="display: none;">Start Relation Tagging</button>
+                <div id="relation_labeling">
+                    <div id='pair_form' novalidate style="width: 80%;margin: auto;">
+                        <h4>Relation Result</h4>
+                        <table class='table table-bordered'>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 130px;">Type</th>
+                                    <th scope="col" style="calc(50% - 105px)">recalled IDs</th>
+                                    <th scope="col" style="calc(50% - 105px)">retold IDs</th>
+                                    <th scope="col" style="width: 80px;">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id='relation_result'>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div novalidate
+                        style="width: 70%;z-index: 999;position: fixed;bottom: 5px;background: white;border: 2px black solid;left: 0;right: 0;margin: auto">
+                        <table class='table'>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 130px;">Type</th>
+                                    <th scope="col" style="calc(50% - 105px)">recalled IDs</th>
+                                    <th scope="col" style="calc(50% - 105px)">retold IDs</th>
+                                    <th scope="col" style="width: 80px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="has-validation">
+                                            <select id="type_selection" class="form-select"
+                                                onchange="validate_relation()">
+                                                <option disabled selected>--</option>
+                                                <option value="match">Match</option>
+                                                <option value="conflict">Conflict</option>
+                                                <option value="added">Added</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please select a valid type.</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="has-validation">
+                                            <input id="recalled_ids" type="text" class="form-control"
+                                                pattern="^\d+(,\d+)*$" placeholder="e.g. 1,2,5" data-id-type='recalled'
+                                                oninput="validate_relation()">
+                                            <div class="invalid-feedback">Please fill the field with the correct
+                                                pattern.</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="has-validation">
+                                            <input id="retold_ids" type="text" class="form-control"
+                                                pattern="^\d+(,\d+)*$" placeholder="e.g. 1,2,5" data-id-type='retold'
+                                                oninput="validate_relation()">
+                                            <div class="invalid-feedback">Please fill the field with the correct
+                                                pattern.</div>
+                                        </div>
+                                    </td>
+                                    <td><button type="button" class="btn btn-sm btn-success"
+                                            style="background-color: #198754" onclick="add_relation()">Added</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <crowd-form onsubmit="return validate_submit()">
+                            <crowd-text-area id="final_id" name="id" rows="4" style="display: none;">${recAgnPairId}
+                            </crowd-text-area>
+                            <crowd-text-area id="final_record" name="record" rows="4" style="display: none;">
+                            </crowd-text-area>
+                            <crowd-text-area id="final_relation" name="relation" rows="4" style="display: none;">
+                            </crowd-text-area>
+                            <h4>Opinion</h4>
+                            <crowd-text-area id="opinion" name="opinion"
+                                placeholder='There are something strange in the articles, ex: two article are totally different. '>
+                            </crowd-text-area>
+                        </crowd-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function validate_submit() {
+                const retold_ids = new Set(Object.keys(record.retold).map(x => parseInt(x)));
+                let tagged_ids = new Set();
+                for (const id in relations) {
+                    for (const i in relations[id]['retold_ids']) {
+                        tagged_ids = tagged_ids.add(parseInt(relations[id]['retold_ids'][i]));
+                    }
+                }
+                tagged_ids = Array.from(tagged_ids);
+                const lack_ids = Array.from(retold_ids).filter(x => !tagged_ids.includes(x));
+                if ((lack_ids).length != 0) {
+                    alert(`All span ids of retold story should be tagged with a relation, ${JSON.stringify(lack_ids)}`);
+                    return false;
+                }
+                return true;
+            }
+            $(document).ready(() => {
+                const result = [
+                    {
+                        "record": {
+                            "recalled": {
+                                "1": {
+                                    "end": 23,
+                                    "start": 0,
+                                    "text": "I am a type 2 diabetic."
+                                },
+                                "2": {
+                                    "end": 63,
+                                    "start": 29,
+                                    "text": "I went in to see my doctor in June"
+                                },
+                                "3": {
+                                    "end": 139,
+                                    "start": 64,
+                                    "text": "she decided that my A1c was not low enough even though it was in the low 7s"
+                                },
+                                "4": {
+                                    "end": 342,
+                                    "start": 283,
+                                    "text": "I take something besides insulin to help regulate diabetes."
+                                },
+                                "5": {
+                                    "end": 510,
+                                    "start": 469,
+                                    "text": "I have been taking Metfornin for 14 years"
+                                },
+                                "6": {
+                                    "end": 624,
+                                    "start": 557,
+                                    "text": "The doctor increased my dosage of this drug to 3 daily instead of 2"
+                                },
+                                "7": {
+                                    "end": 755,
+                                    "start": 732,
+                                    "text": "I started getting sick,"
+                                },
+                                "8": {
+                                    "end": 860,
+                                    "start": 806,
+                                    "text": "I had ran out of blood pressure medicine about 2 weeks"
+                                },
+                                "9": {
+                                    "end": 1047,
+                                    "start": 941,
+                                    "text": "I also started taking my blood pressure medicine and started having side effects like nausea and dizziness"
+                                },
+                                "10": {
+                                    "end": 1228,
+                                    "start": 1191,
+                                    "text": "I woke up in the hospital on July 4th"
+                                },
+                                "11": {
+                                    "end": 1285,
+                                    "start": 1231,
+                                    "text": "My sugar had crashed from taking too much of this drug"
+                                },
+                                "12": {
+                                    "end": 1362,
+                                    "start": 1328,
+                                    "text": "he rushed me to the emergency room"
+                                },
+                                "13": {
+                                    "end": 1413,
+                                    "start": 1363,
+                                    "text": " I woke up after having been given a glucose drip."
+                                }
+                            },
+                            "retold": {
+                                "14": {
+                                    "end": 157,
+                                    "start": 62,
+                                    "text": "My doctor who thought my A1c level was too high instructed me to increase one of my medications"
+                                },
+                                "15": {
+                                    "end": 347,
+                                    "start": 291,
+                                    "text": "I had been taking this prescribed medicine for 13 years."
+                                },
+                                "16": {
+                                    "end": 377,
+                                    "start": 348,
+                                    "text": "I had gotten up to go to work"
+                                },
+                                "17": {
+                                    "end": 446,
+                                    "start": 415,
+                                    "text": "I tested and it was indeed low,"
+                                },
+                                "19": {
+                                    "end": 650,
+                                    "start": 637,
+                                    "text": "I went to bed"
+                                },
+                                "20": {
+                                    "end": 786,
+                                    "start": 730,
+                                    "text": " I woke up in the hospital in a bed with an IV in my arm"
+                                },
+                                "21": {
+                                    "end": 1030,
+                                    "start": 901,
+                                    "text": "I got up a while later and was acting screwy-if a person hasn't seen a hypoglycemic episode they might think the person was drunk"
+                                },
+                                "22": {
+                                    "end": 1074,
+                                    "start": 1040,
+                                    "text": "I got up then fell in the bathroom"
+                                },
+                                "23": {
+                                    "end": 1111,
+                                    "start": 1076,
+                                    "text": "my husband came in and talked to me"
+                                },
+                                "24": {
+                                    "end": 1267,
+                                    "start": 1235,
+                                    "text": "He finally got me up and dressed"
+                                },
+                                "25": {
+                                    "end": 1303,
+                                    "start": 1274,
+                                    "text": "he rushed me to the hospital "
+                                }
+                            }
+                        },
+                        "relation": {
+                            "1": {
+                                "recalled_ids": [
+                                    2
+                                ],
+                                "retold_ids": [
+                                    14
+                                ],
+                                "type": "match"
+                            },
+                            "2": {
+                                "recalled_ids": [
+                                    3
+                                ],
+                                "retold_ids": [
+                                    14
+                                ],
+                                "type": "match"
+                            },
+                            "3": {
+                                "recalled_ids": [
+                                    5
+                                ],
+                                "retold_ids": [
+                                    15
+                                ],
+                                "type": "match"
+                            },
+                            "4": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    16
+                                ],
+                                "type": "added"
+                            },
+                            "5": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    17
+                                ],
+                                "type": "added"
+                            },
+                            "6": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    19
+                                ],
+                                "type": "added"
+                            },
+                            "7": {
+                                "recalled_ids": [
+                                    10
+                                ],
+                                "retold_ids": [
+                                    20
+                                ],
+                                "type": "match"
+                            },
+                            "8": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    21
+                                ],
+                                "type": "added"
+                            },
+                            "9": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    22
+                                ],
+                                "type": "added"
+                            },
+                            "10": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    23
+                                ],
+                                "type": "added"
+                            },
+                            "11": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    24
+                                ],
+                                "type": "added"
+                            },
+                            "12": {
+                                "recalled_ids": [
+                                    12
+                                ],
+                                "retold_ids": [
+                                    25
+                                ],
+                                "type": "match"
+                            }
+                        }
+                    }
+                ][0]
+                document.querySelector("#recalled").dataset.text = `I am a type 2 diabetic. When I went in to see my doctor in June she decided that my A1c was not low enough even though it was in the low 7s which I thought was great. My doctor said it should really be around 6 because higher A1c's lead to more problems down the road for diabetics. I take something besides insulin to help regulate diabetes. it's called Metfornin.  Metfornin is very typical and it's commonly used for diabetic patients to help regulate blood sugars. I have been taking Metfornin for 14 years since I had been determined to be a diabetic. The doctor increased my dosage of this drug to 3 daily instead of 2 which I did not think was a very big deal, I mean I had taken them for years with absolutely no problems.  I started getting sick, I thought it was taking blood pressure medicine.  I had ran out of blood pressure medicine about 2 weeks before I went to see my doctor. After I started taking the additional Metfornin I also started taking my blood pressure medicine and started having side effects like nausea and dizziness. I thought I had contracted the flu or blamed it on the blood pressure medicine. I was horribly ill and passed out after waking up on the 4th. I woke up in the hospital on July 4th.  My sugar had crashed from taking too much of this drug and my husband wasn't sure what to do, so he rushed me to the emergency room. I woke up after having been given a glucose drip.`;
+                document.querySelector("#retold").dataset.text = `It was a sobering reminder that I had to take care of myself. My doctor who thought my A1c level was too high instructed me to increase one of my medications. I hadn't been feeling well the last week but I hadn't thought that it was increasing one of my pills daily that was making me sick. I had been taking this prescribed medicine for 13 years. I had gotten up to go to work and I know my sugar was running low. I tested and it was indeed low, but was still really tired. I decided to go back to bed since it was July 4th and I did not have to go to work. I didn't take any precautions like eating a carb or two to bring my sugar up. I went to bed and that was about the last thing that I remember. The next thing I do remember I woke up in the hospital in a bed with an IV in my arm. My sugar had been 33 when I had been brought in, which was almost coma level. I guess from what my husband said, I got up a while later and was acting screwy-if a person hasn't seen a hypoglycemic episode they might think the person was drunk. I guess I got up then fell in the bathroom, my husband came in and talked to me and said I wasn't making any sense. He finally got me up and then I walked to the living room and passed out on the floor. He finally got me up and dressed. Then he rushed me to the hospital because he was not sure of what to do.`;
+                let story_blocks = ["#recalled", "#retold"];
+                story_blocks.forEach((story_type) => {
+                    let e = $(story_type)[0];
+                    e.innerHTML = e.dataset.text;
+                    const t = story_type.substr(1);
+                    l = result['record'][t];
+                    for (const id in l) {
+                        add_span(e, l[id]['text'], parseInt(id));
+                    }
+                });
+                let table = document.querySelector("#relation_result");
+                l = result['relation'];
+                for (const id in l) {
+                    r = l[id];
+                    tr = document.createElement("tr");
+                    tr.id = `relation${id}`;
+                    relation_type = r['type']
+                    recalled_table = build_html(r['recalled_ids'], record.recalled);
+                    retold_table = build_html(r['retold_ids'], record.retold);
+                    tr.innerHTML = `<td>${relation_type}</td><td>${recalled_table}</td><td>${retold_table}</td><td><button type="button" class="btn btn-sm btn-danger" style="background-color: #dc3545"onclick=delete_relation(${relation_counter})>X</button></td>`;
+                    table.append(tr);
+                    relations[relation_counter] = {
+                        type: relation_type,
+                        recalled_ids: r['recalled_ids'],
+                        retold_ids: r['retold_ids'],
+                    };
+                    document.querySelector("#final_relation").value = relations;
+                    relation_counter = parseInt(id) + 1;
+                }
+
+
+            });
+        </script>
+</body>
+
+</html>

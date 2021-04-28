@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="ui container">
+        <div id="experiment" class="ui top aligned centered relaxed grid">
+            <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/mark.js/8.6.0/mark.min.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+                crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+                crossorigin="anonymous"></script>
+            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/relation.min.js"></script> -->
+            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/span_label.min.js"></script> -->
+            <script src="relation.js"></script>
+            <script src="span_label.js"></script>
+            <style>
+                .flex-container {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: 30px;
+                    justify-content: space-between;
+                }
+
+                .flex-item {
+                    text-align: justify;
+                    width: 48%;
+                }
+
+                [class*="retold_mark"] {
+                    background: lightgreen;
+                    padding: .1em;
+                }
+
+                [class*="recalled_mark"] {
+                    background: lightskyblue;
+                    padding: .1em;
+                }
+
+                table {
+                    table-layout: fixed;
+                }
+
+                .result {
+                    margin-top: 50px;
+                }
+
+                tr>td {
+                    vertical-align: baseline;
+                }
+
+                h3 {
+                    margin-top: 30px;
+                }
+
+                input,
+                select {
+                    width: 100%;
+                }
+            </style>
+            <div style="text-align: center; margin:30px auto 200px auto">
+                <a id='instruction_btn' href="https://coyoteleo.github.io/mturk/instruction.html"
+                    class="btn btn-primary" target="_blank" onclick="start_span_labeling()">View instructions before
+                    labeling</a>
+                <hr>
+                <div id="span_labeling">
+                    <div style="text-align: justify;">
+                        <h4 style="text-align: center;padding: 8px;">Summary</h4>
+                        This story is about a canoe float with grandpa. We had a great float trip with my dad but were
+                        saddened to realize how
+                        bad his Alzheimer's really is.
+                    </div>
+                    <table class='table'>
+                        <tr>
+                            <th style="width: 50%;">Recalled story</th>
+                            <th style="width: 10px;"></th>
+                            <th style="width: 50%;">Retold story</th>
+                        </tr>
+                        <tbody style="border-color: black;">
+                            <tr>
+                                <td id='recalled' style="text-align: justify;">
+                                </td>
+                                <td></td>
+                                <td id='retold' style="text-align: justify;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id='recalled_result' class='result'></td>
+                                <td></td>
+                                <td id='retold_result' class='result'></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button id='relation_btn' class="btn btn-primary" type="button" onclick="start_relation_tagging()"
+                    style="display: none;">Start Relation Tagging</button>
+                <div id="relation_labeling">
+                    <div id='pair_form' novalidate style="width: 80%;margin: auto;">
+                        <h4>Relation Result</h4>
+                        <table class='table table-bordered'>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 130px;">Type</th>
+                                    <th scope="col" style="calc(50% - 105px)">recalled IDs</th>
+                                    <th scope="col" style="calc(50% - 105px)">retold IDs</th>
+                                    <th scope="col" style="width: 80px;">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id='relation_result'>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div novalidate
+                        style="width: 70%;z-index: 999;position: fixed;bottom: 5px;background: white;border: 2px black solid;left: 0;right: 0;margin: auto">
+                        <table class='table'>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 130px;">Type</th>
+                                    <th scope="col" style="calc(50% - 105px)">recalled IDs</th>
+                                    <th scope="col" style="calc(50% - 105px)">retold IDs</th>
+                                    <th scope="col" style="width: 80px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="has-validation">
+                                            <select id="type_selection" class="form-select"
+                                                onchange="validate_relation()">
+                                                <option disabled selected>--</option>
+                                                <option value="match">Match</option>
+                                                <option value="conflict">Conflict</option>
+                                                <option value="added">Added</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please select a valid type.</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="has-validation">
+                                            <input id="recalled_ids" type="text" class="form-control"
+                                                pattern="^\d+(,\d+)*$" placeholder="e.g. 1,2,5" data-id-type='recalled'
+                                                oninput="validate_relation()">
+                                            <div class="invalid-feedback">Please fill the field with the correct
+                                                pattern.</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="has-validation">
+                                            <input id="retold_ids" type="text" class="form-control"
+                                                pattern="^\d+(,\d+)*$" placeholder="e.g. 1,2,5" data-id-type='retold'
+                                                oninput="validate_relation()">
+                                            <div class="invalid-feedback">Please fill the field with the correct
+                                                pattern.</div>
+                                        </div>
+                                    </td>
+                                    <td><button type="button" class="btn btn-sm btn-success"
+                                            style="background-color: #198754" onclick="add_relation()">Added</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <crowd-form onsubmit="return validate_submit()">
+                            <crowd-text-area id="final_id" name="id" rows="4" style="display: none;">${recAgnPairId}
+                            </crowd-text-area>
+                            <crowd-text-area id="final_record" name="record" rows="4" style="display: none;">
+                            </crowd-text-area>
+                            <crowd-text-area id="final_relation" name="relation" rows="4" style="display: none;">
+                            </crowd-text-area>
+                            <h4>Opinion</h4>
+                            <crowd-text-area id="opinion" name="opinion"
+                                placeholder='There are something strange in the articles, ex: two article are totally different. '>
+                            </crowd-text-area>
+                        </crowd-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function validate_submit() {
+                const retold_ids = new Set(Object.keys(record.retold).map(x => parseInt(x)));
+                let tagged_ids = new Set();
+                for (const id in relations) {
+                    for (const i in relations[id]['retold_ids']) {
+                        tagged_ids = tagged_ids.add(parseInt(relations[id]['retold_ids'][i]));
+                    }
+                }
+                tagged_ids = Array.from(tagged_ids);
+                const lack_ids = Array.from(retold_ids).filter(x => !tagged_ids.includes(x));
+                if ((lack_ids).length != 0) {
+                    alert(`All span ids of retold story should be tagged with a relation, ${JSON.stringify(lack_ids)}`);
+                    return false;
+                }
+                return true;
+            }
+            $(document).ready(() => {
+                const result = [
+                    {
+                        "record": {
+                            "recalled": {
+                                "1": {
+                                    "end": 106,
+                                    "start": 61,
+                                    "text": "He graduated from high school in June of 2019"
+                                },
+                                "2": {
+                                    "end": 340,
+                                    "start": 172,
+                                    "text": "He worked hard and was able to make it there through a combination of decent grades, a very good score on the SAT as well as working part-time for his father's business"
+                                },
+                                "3": {
+                                    "end": 364,
+                                    "start": 342,
+                                    "text": "He took the SATs twice"
+                                },
+                                "4": {
+                                    "end": 419,
+                                    "start": 366,
+                                    "text": "The first time he didn't do so well and scored a 1250"
+                                },
+                                "5": {
+                                    "end": 498,
+                                    "start": 421,
+                                    "text": "However the second time, he made a conscious effort to work on the weaknesses"
+                                },
+                                "6": {
+                                    "end": 598,
+                                    "start": 552,
+                                    "text": "He is also an intern for his father's company,"
+                                },
+                                "7": {
+                                    "end": 899,
+                                    "start": 869,
+                                    "text": "I work as a financial analyst "
+                                },
+                                "8": {
+                                    "end": 798,
+                                    "start": 677,
+                                    "text": "he cleaned up, made sure the pantry and other areas were well stocked and helped to input data into the company's systems"
+                                },
+                                "9": {
+                                    "end": 1118,
+                                    "start": 1056,
+                                    "text": "He ended up opening the account and buying 25 shares of Disney"
+                                },
+                                "11": {
+                                    "end": 1210,
+                                    "start": 1139,
+                                    "text": "we first went to a nice dinner at our local favorite Italian restaurant"
+                                },
+                                "12": {
+                                    "end": 1312,
+                                    "start": 1294,
+                                    "text": "we went to a movie"
+                                },
+                                "13": {
+                                    "end": 1342,
+                                    "start": 1325,
+                                    "text": "we went back home"
+                                },
+                                "14": {
+                                    "end": 1442,
+                                    "start": 1349,
+                                    "text": "we relaxed, played some board games and shared stories about the time that we went to college"
+                                }
+                            },
+                            "retold": {
+                                "15": {
+                                    "end": 76,
+                                    "start": 35,
+                                    "text": "My nephew was graduating from high school"
+                                },
+                                "16": {
+                                    "end": 183,
+                                    "start": 105,
+                                    "text": "The first thing that we did was take him to his favorite restaurant for lunch."
+                                },
+                                "17": {
+                                    "end": 232,
+                                    "start": 184,
+                                    "text": "We all sat down and enjoyed a great sushi layout"
+                                },
+                                "18": {
+                                    "end": 562,
+                                    "start": 434,
+                                    "text": "The restaurant also had cooked food as well so for the ones that didn't want raw fish, they had the chance to order other things"
+                                },
+                                "19": {
+                                    "end": 596,
+                                    "start": 568,
+                                    "text": "he really enjoyed the sushi."
+                                },
+                                "21": {
+                                    "end": 675,
+                                    "start": 640,
+                                    "text": "My wife had the sashami combination"
+                                },
+                                "22": {
+                                    "end": 742,
+                                    "start": 688,
+                                    "text": "we went to the movie theater to watch a movie together"
+                                },
+                                "23": {
+                                    "end": 799,
+                                    "start": 749,
+                                    "text": "we went to the golf course to play some mini golf,"
+                                },
+                                "24": {
+                                    "end": 978,
+                                    "start": 935,
+                                    "text": "he had a graduation party with his friends,"
+                                },
+                                "27": {
+                                    "end": 639,
+                                    "start": 597,
+                                    "text": "I, myself, had the spicy roll combination."
+                                },
+                                "30": {
+                                    "end": 1099,
+                                    "start": 1032,
+                                    "text": "light up a bonfire and burn all their notes from their senior year."
+                                }
+                            }
+                        },
+                        "relation": {
+                            "1": {
+                                "recalled_ids": [
+                                    1
+                                ],
+                                "retold_ids": [
+                                    15
+                                ],
+                                "type": "match"
+                            },
+                            "2": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    16
+                                ],
+                                "type": "added"
+                            },
+                            "3": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    17
+                                ],
+                                "type": "added"
+                            },
+                            "4": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    18
+                                ],
+                                "type": "added"
+                            },
+                            "5": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    19
+                                ],
+                                "type": "added"
+                            },
+                            "6": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    21
+                                ],
+                                "type": "added"
+                            },
+                            "7": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    22
+                                ],
+                                "type": "added"
+                            },
+                            "8": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    23
+                                ],
+                                "type": "added"
+                            },
+                            "9": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    24
+                                ],
+                                "type": "added"
+                            },
+                            "10": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    27
+                                ],
+                                "type": "added"
+                            },
+                            "11": {
+                                "recalled_ids": [],
+                                "retold_ids": [
+                                    30
+                                ],
+                                "type": "added"
+                            }
+                        }
+                    }
+                ][0]
+                document.querySelector("#recalled").dataset.text = `I wanted to discuss my nephew's graduation from high school. He graduated from high school in June of 2019 and I was so proud because he is going to Princeton for college. He worked hard and was able to make it there through a combination of decent grades, a very good score on the SAT as well as working part-time for his father's business. He took the SATs twice. The first time he didn't do so well and scored a 1250. However the second time, he made a conscious effort to work on the weaknesses that he remembered and improved his score to a 1400. He is also an intern for his father's company, which is in the real estate business. He did the various odd jobs there where he cleaned up, made sure the pantry and other areas were well stocked and helped to input data into the company's systems. Part of the money that he saved was used to start up an IRA account. I work as a financial analyst and tried to show him what would happen if he used the power of compounding interest and how large he could grow his nest egg if he had 40+ years to invest. He ended up opening the account and buying 25 shares of Disney. When he graduated, we first went to a nice dinner at our local favorite Italian restaurant where he had his favorite meal, lasagna with a side of creamed spinach. After that we went to a movie. After that we went back home where we relaxed, played some board games and shared stories about the time that we went to college. It was, all in all, a very fun night.`;
+                document.querySelector("#retold").dataset.text = `It was a happy day for the family. My nephew was graduating from high school and we wanted to celebrate. The first thing that we did was take him to his favorite restaurant for lunch. We all sat down and enjoyed a great sushi layout. His favorite fish is yellowtail, so in addition to the variety of different fish, we made sure to get him yellowtail rolls, spicy yellowtail rolls, and yellowtail/salmon rolls, which is his favorite. The restaurant also had cooked food as well so for the ones that didn't want raw fish, they had the chance to order other things. But he really enjoyed the sushi. I, myself, had the spicy roll combination. My wife had the sashami combination. After that we went to the movie theater to watch a movie together. Then we went to the golf course to play some mini golf, which is what his sister likes. We always try to make sure all the family members are involved in some way or another. Then after that he had a graduation party with his friends, where one of the highlights (for them anyway) was to light up a bonfire and burn all their notes from their senior year. It was also a bittersweet time because it was going to be the last time they would all gather together. Most of them were going to different colleges and universities so it would be harder in the future to all get together.`;
+                let story_blocks = ["#recalled", "#retold"];
+                story_blocks.forEach((story_type) => {
+                    let e = $(story_type)[0];
+                    e.innerHTML = e.dataset.text;
+                    const t = story_type.substr(1);
+                    l = result['record'][t];
+                    for (const id in l) {
+                        add_span(e, l[id]['text'], parseInt(id));
+                    }
+                });
+                let table = document.querySelector("#relation_result");
+                l = result['relation'];
+                for (const id in l) {
+                    r = l[id];
+                    tr = document.createElement("tr");
+                    tr.id = `relation${id}`;
+                    relation_type = r['type']
+                    recalled_table = build_html(r['recalled_ids'], record.recalled);
+                    retold_table = build_html(r['retold_ids'], record.retold);
+                    tr.innerHTML = `<td>${relation_type}</td><td>${recalled_table}</td><td>${retold_table}</td><td><button type="button" class="btn btn-sm btn-danger" style="background-color: #dc3545"onclick=delete_relation(${relation_counter})>X</button></td>`;
+                    table.append(tr);
+                    relations[relation_counter] = {
+                        type: relation_type,
+                        recalled_ids: r['recalled_ids'],
+                        retold_ids: r['retold_ids'],
+                    };
+                    document.querySelector("#final_relation").value = relations;
+                    relation_counter = parseInt(id) + 1;
+                }
+
+
+            });
+        </script>
+</body>
+
+</html>

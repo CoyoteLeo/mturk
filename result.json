@@ -1,0 +1,1034 @@
+{
+    "369J354OFEW77NS5J449VKWX6V4G6K": [
+        {
+            "record": {
+                "recalled": {
+                    "1": {
+                        "end": 106,
+                        "start": 61,
+                        "text": "He graduated from high school in June of 2019"
+                    },
+                    "2": {
+                        "end": 340,
+                        "start": 172,
+                        "text": "He worked hard and was able to make it there through a combination of decent grades, a very good score on the SAT as well as working part-time for his father's business"
+                    },
+                    "3": {
+                        "end": 364,
+                        "start": 342,
+                        "text": "He took the SATs twice"
+                    },
+                    "4": {
+                        "end": 419,
+                        "start": 366,
+                        "text": "The first time he didn't do so well and scored a 1250"
+                    },
+                    "5": {
+                        "end": 498,
+                        "start": 421,
+                        "text": "However the second time, he made a conscious effort to work on the weaknesses"
+                    },
+                    "6": {
+                        "end": 598,
+                        "start": 552,
+                        "text": "He is also an intern for his father's company,"
+                    },
+                    "7": {
+                        "end": 899,
+                        "start": 869,
+                        "text": "I work as a financial analyst "
+                    },
+                    "8": {
+                        "end": 798,
+                        "start": 677,
+                        "text": "he cleaned up, made sure the pantry and other areas were well stocked and helped to input data into the company's systems"
+                    },
+                    "9": {
+                        "end": 1118,
+                        "start": 1056,
+                        "text": "He ended up opening the account and buying 25 shares of Disney"
+                    },
+                    "11": {
+                        "end": 1210,
+                        "start": 1139,
+                        "text": "we first went to a nice dinner at our local favorite Italian restaurant"
+                    },
+                    "12": {
+                        "end": 1312,
+                        "start": 1294,
+                        "text": "we went to a movie"
+                    },
+                    "13": {
+                        "end": 1342,
+                        "start": 1325,
+                        "text": "we went back home"
+                    },
+                    "14": {
+                        "end": 1442,
+                        "start": 1349,
+                        "text": "we relaxed, played some board games and shared stories about the time that we went to college"
+                    }
+                },
+                "retold": {
+                    "15": {
+                        "end": 76,
+                        "start": 35,
+                        "text": "My nephew was graduating from high school"
+                    },
+                    "16": {
+                        "end": 183,
+                        "start": 105,
+                        "text": "The first thing that we did was take him to his favorite restaurant for lunch."
+                    },
+                    "17": {
+                        "end": 232,
+                        "start": 184,
+                        "text": "We all sat down and enjoyed a great sushi layout"
+                    },
+                    "18": {
+                        "end": 562,
+                        "start": 434,
+                        "text": "The restaurant also had cooked food as well so for the ones that didn't want raw fish, they had the chance to order other things"
+                    },
+                    "19": {
+                        "end": 596,
+                        "start": 568,
+                        "text": "he really enjoyed the sushi."
+                    },
+                    "21": {
+                        "end": 675,
+                        "start": 640,
+                        "text": "My wife had the sashami combination"
+                    },
+                    "22": {
+                        "end": 742,
+                        "start": 688,
+                        "text": "we went to the movie theater to watch a movie together"
+                    },
+                    "23": {
+                        "end": 799,
+                        "start": 749,
+                        "text": "we went to the golf course to play some mini golf,"
+                    },
+                    "24": {
+                        "end": 978,
+                        "start": 935,
+                        "text": "he had a graduation party with his friends,"
+                    },
+                    "27": {
+                        "end": 639,
+                        "start": 597,
+                        "text": "I, myself, had the spicy roll combination."
+                    },
+                    "30": {
+                        "end": 1099,
+                        "start": 1032,
+                        "text": "light up a bonfire and burn all their notes from their senior year."
+                    }
+                }
+            },
+            "relation": {
+                "1": {
+                    "recalled_ids": [
+                        1
+                    ],
+                    "retold_ids": [
+                        15
+                    ],
+                    "type": "match"
+                },
+                "2": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        16
+                    ],
+                    "type": "added"
+                },
+                "3": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        17
+                    ],
+                    "type": "added"
+                },
+                "4": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        18
+                    ],
+                    "type": "added"
+                },
+                "5": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        19
+                    ],
+                    "type": "added"
+                },
+                "6": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        21
+                    ],
+                    "type": "added"
+                },
+                "7": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        22
+                    ],
+                    "type": "added"
+                },
+                "8": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        23
+                    ],
+                    "type": "added"
+                },
+                "9": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        24
+                    ],
+                    "type": "added"
+                },
+                "10": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        27
+                    ],
+                    "type": "added"
+                },
+                "11": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        30
+                    ],
+                    "type": "added"
+                }
+            }
+        }
+    ],
+    "3C44YUNSI2BC590JWA2AVZKHRRUDPY": [
+        {
+            "record": {
+                "recalled": {
+                    "1": {
+                        "end": 35,
+                        "start": 0,
+                        "text": "My niece lives about 350 miles away"
+                    },
+                    "6": {
+                        "end": 352,
+                        "start": 282,
+                        "text": "When religion does come up, she tunes herself out of the conversation."
+                    },
+                    "7": {
+                        "end": 477,
+                        "start": 432,
+                        "text": "My wife and I were taking her school shopping"
+                    },
+                    "9": {
+                        "end": 580,
+                        "start": 483,
+                        "text": "she is actually the one who brought up something she thought was derogatory to women in the bible"
+                    },
+                    "10": {
+                        "end": 677,
+                        "start": 622,
+                        "text": "I was able to explain what the scripture actually meant"
+                    },
+                    "11": {
+                        "end": 714,
+                        "start": 679,
+                        "text": "She was hesitant to listen at first"
+                    },
+                    "12": {
+                        "end": 764,
+                        "start": 720,
+                        "text": "I could tell that I had piqued her interest."
+                    },
+                    "13": {
+                        "end": 817,
+                        "start": 765,
+                        "text": "She quickly changed the subject after my explanation"
+                    },
+                    "14": {
+                        "end": 973,
+                        "start": 933,
+                        "text": "they took the scriptures out of context."
+                    },
+                    "15": {
+                        "end": 924,
+                        "start": 826,
+                        "text": "she didn't like the true meaning rather than the meaning she and her friends had chosen to believe"
+                    }
+                },
+                "retold": {
+                    "16": {
+                        "end": 317,
+                        "start": 275,
+                        "text": "I took my niece shopping a few months back"
+                    },
+                    "17": {
+                        "end": 367,
+                        "start": 319,
+                        "text": "she brought up something that was from the bible"
+                    },
+                    "18": {
+                        "end": 485,
+                        "start": 417,
+                        "text": "she did have to mention a certain custom that was found in the bible"
+                    },
+                    "19": {
+                        "end": 586,
+                        "start": 498,
+                        "text": "she took a worldly view of it rather than read the entire book to understand the context"
+                    },
+                    "20": {
+                        "end": 652,
+                        "start": 588,
+                        "text": "I was able to explain what the snippet she shared actually meant"
+                    },
+                    "21": {
+                        "end": 672,
+                        "start": 654,
+                        "text": "She rarely listens"
+                    },
+                    "22": {
+                        "end": 792,
+                        "start": 731,
+                        "text": "she was the one who brought it up so I did have her attention"
+                    }
+                }
+            },
+            "relation": {
+                "1": {
+                    "recalled_ids": [
+                        7
+                    ],
+                    "retold_ids": [
+                        16
+                    ],
+                    "type": "match"
+                },
+                "3": {
+                    "recalled_ids": [
+                        9
+                    ],
+                    "retold_ids": [
+                        17,
+                        18
+                    ],
+                    "type": "match"
+                },
+                "4": {
+                    "recalled_ids": [
+                        10
+                    ],
+                    "retold_ids": [
+                        20
+                    ],
+                    "type": "match"
+                },
+                "5": {
+                    "recalled_ids": [
+                        11
+                    ],
+                    "retold_ids": [
+                        21
+                    ],
+                    "type": "match"
+                },
+                "6": {
+                    "recalled_ids": [
+                        12
+                    ],
+                    "retold_ids": [
+                        22
+                    ],
+                    "type": "match"
+                },
+                "7": {
+                    "recalled_ids": [
+                        14
+                    ],
+                    "retold_ids": [
+                        19
+                    ],
+                    "type": "match"
+                }
+            }
+        }
+    ],
+    "3I0BTBYZAY7CF3RQBLAYTJTA05JY0A": [
+        {
+            "record": {
+                "recalled": {
+                    "1": {
+                        "end": 23,
+                        "start": 0,
+                        "text": "I am a type 2 diabetic."
+                    },
+                    "2": {
+                        "end": 63,
+                        "start": 29,
+                        "text": "I went in to see my doctor in June"
+                    },
+                    "3": {
+                        "end": 139,
+                        "start": 64,
+                        "text": "she decided that my A1c was not low enough even though it was in the low 7s"
+                    },
+                    "4": {
+                        "end": 342,
+                        "start": 283,
+                        "text": "I take something besides insulin to help regulate diabetes."
+                    },
+                    "5": {
+                        "end": 510,
+                        "start": 469,
+                        "text": "I have been taking Metfornin for 14 years"
+                    },
+                    "6": {
+                        "end": 624,
+                        "start": 557,
+                        "text": "The doctor increased my dosage of this drug to 3 daily instead of 2"
+                    },
+                    "7": {
+                        "end": 755,
+                        "start": 732,
+                        "text": "I started getting sick,"
+                    },
+                    "8": {
+                        "end": 860,
+                        "start": 806,
+                        "text": "I had ran out of blood pressure medicine about 2 weeks"
+                    },
+                    "9": {
+                        "end": 1047,
+                        "start": 941,
+                        "text": "I also started taking my blood pressure medicine and started having side effects like nausea and dizziness"
+                    },
+                    "10": {
+                        "end": 1228,
+                        "start": 1191,
+                        "text": "I woke up in the hospital on July 4th"
+                    },
+                    "11": {
+                        "end": 1285,
+                        "start": 1231,
+                        "text": "My sugar had crashed from taking too much of this drug"
+                    },
+                    "12": {
+                        "end": 1362,
+                        "start": 1328,
+                        "text": "he rushed me to the emergency room"
+                    },
+                    "13": {
+                        "end": 1413,
+                        "start": 1363,
+                        "text": " I woke up after having been given a glucose drip."
+                    }
+                },
+                "retold": {
+                    "14": {
+                        "end": 157,
+                        "start": 62,
+                        "text": "My doctor who thought my A1c level was too high instructed me to increase one of my medications"
+                    },
+                    "15": {
+                        "end": 347,
+                        "start": 291,
+                        "text": "I had been taking this prescribed medicine for 13 years."
+                    },
+                    "16": {
+                        "end": 377,
+                        "start": 348,
+                        "text": "I had gotten up to go to work"
+                    },
+                    "17": {
+                        "end": 446,
+                        "start": 415,
+                        "text": "I tested and it was indeed low,"
+                    },
+                    "19": {
+                        "end": 650,
+                        "start": 637,
+                        "text": "I went to bed"
+                    },
+                    "20": {
+                        "end": 786,
+                        "start": 730,
+                        "text": " I woke up in the hospital in a bed with an IV in my arm"
+                    },
+                    "21": {
+                        "end": 1030,
+                        "start": 901,
+                        "text": "I got up a while later and was acting screwy-if a person hasn't seen a hypoglycemic episode they might think the person was drunk"
+                    },
+                    "22": {
+                        "end": 1074,
+                        "start": 1040,
+                        "text": "I got up then fell in the bathroom"
+                    },
+                    "23": {
+                        "end": 1111,
+                        "start": 1076,
+                        "text": "my husband came in and talked to me"
+                    },
+                    "24": {
+                        "end": 1267,
+                        "start": 1235,
+                        "text": "He finally got me up and dressed"
+                    },
+                    "25": {
+                        "end": 1303,
+                        "start": 1274,
+                        "text": "he rushed me to the hospital "
+                    }
+                }
+            },
+            "relation": {
+                "1": {
+                    "recalled_ids": [
+                        2
+                    ],
+                    "retold_ids": [
+                        14
+                    ],
+                    "type": "match"
+                },
+                "2": {
+                    "recalled_ids": [
+                        3
+                    ],
+                    "retold_ids": [
+                        14
+                    ],
+                    "type": "match"
+                },
+                "3": {
+                    "recalled_ids": [
+                        5
+                    ],
+                    "retold_ids": [
+                        15
+                    ],
+                    "type": "match"
+                },
+                "4": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        16
+                    ],
+                    "type": "added"
+                },
+                "5": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        17
+                    ],
+                    "type": "added"
+                },
+                "6": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        19
+                    ],
+                    "type": "added"
+                },
+                "7": {
+                    "recalled_ids": [
+                        10
+                    ],
+                    "retold_ids": [
+                        20
+                    ],
+                    "type": "match"
+                },
+                "8": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        21
+                    ],
+                    "type": "added"
+                },
+                "9": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        22
+                    ],
+                    "type": "added"
+                },
+                "10": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        23
+                    ],
+                    "type": "added"
+                },
+                "11": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        24
+                    ],
+                    "type": "added"
+                },
+                "12": {
+                    "recalled_ids": [
+                        12
+                    ],
+                    "retold_ids": [
+                        25
+                    ],
+                    "type": "match"
+                }
+            }
+        }
+    ],
+    "3W8CV64QJ3L8P2PE1HP30UZ0EF89HB": [
+        {
+            "record": {
+                "recalled": {
+                    "1": {
+                        "end": 89,
+                        "start": 0,
+                        "text": "A friend, let's call her G, took it upon herself to pay for a trip for my other friend, D"
+                    },
+                    "4": {
+                        "end": 150,
+                        "start": 98,
+                        "text": "dealing with a recent diagnosis of a stage 4 cancer."
+                    },
+                    "5": {
+                        "end": 277,
+                        "start": 163,
+                        "text": "I was the one who was doing all the day to day helping with doctor's appointments and taking care of stuff at home"
+                    },
+                    "6": {
+                        "end": 770,
+                        "start": 719,
+                        "text": "it was truly the most luxurious place I had been in"
+                    },
+                    "7": {
+                        "end": 1083,
+                        "start": 985,
+                        "text": "G wanted to place to be a surprise so only gave D and me the address but not the name of the hotel"
+                    },
+                    "8": {
+                        "end": 1175,
+                        "start": 1085,
+                        "text": "Everything was made out of recycled material, the suite was stunning with a beautiful view"
+                    },
+                    "9": {
+                        "end": 1235,
+                        "start": 1177,
+                        "text": "There were several pools to pick from as well as the ocean"
+                    },
+                    "10": {
+                        "end": 1306,
+                        "start": 1237,
+                        "text": "Every night we would walk around town and pick places to have a drink"
+                    }
+                },
+                "retold": {
+                    "2": {
+                        "end": 83,
+                        "start": 0,
+                        "text": "My friend D, who lives on the other coast wanted to pay for a trip for my friend M,"
+                    },
+                    "3": {
+                        "end": 134,
+                        "start": 92,
+                        "text": "recently diagnosed with a serious illness."
+                    },
+                    "11": {
+                        "end": 184,
+                        "start": 135,
+                        "text": "M had no time for anything but work and treatment"
+                    },
+                    "12": {
+                        "end": 374,
+                        "start": 301,
+                        "text": "I was doing the majority of the day to day care and doctor's appointments"
+                    },
+                    "13": {
+                        "end": 454,
+                        "start": 418,
+                        "text": "M wanted to pick a tropical location"
+                    },
+                    "14": {
+                        "end": 542,
+                        "start": 459,
+                        "text": "D paid for an accommodation at a place it would be easy enough for us all to get to"
+                    },
+                    "15": {
+                        "end": 619,
+                        "start": 590,
+                        "text": "D flew in from the West Coast"
+                    },
+                    "17": {
+                        "end": 673,
+                        "start": 624,
+                        "text": "M and I took the same flight from the East Coast."
+                    },
+                    "18": {
+                        "end": 794,
+                        "start": 711,
+                        "text": "M and I pulled up in the taxi and saw the hotel was more beautiful than we imagined"
+                    },
+                    "19": {
+                        "end": 960,
+                        "start": 856,
+                        "text": "There were several pools to choose from and well as being right on the beach so the ocean was steps away"
+                    },
+                    "20": {
+                        "end": 1043,
+                        "start": 962,
+                        "text": "At night we would go out or simply walk around in the beautiful tropical weather."
+                    }
+                }
+            },
+            "relation": {
+                "1": {
+                    "recalled_ids": [
+                        1
+                    ],
+                    "retold_ids": [
+                        2
+                    ],
+                    "type": "match"
+                },
+                "2": {
+                    "recalled_ids": [
+                        4
+                    ],
+                    "retold_ids": [
+                        3
+                    ],
+                    "type": "match"
+                },
+                "3": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        11
+                    ],
+                    "type": "added"
+                },
+                "4": {
+                    "recalled_ids": [
+                        5
+                    ],
+                    "retold_ids": [
+                        12
+                    ],
+                    "type": "match"
+                },
+                "5": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        13
+                    ],
+                    "type": "added"
+                },
+                "6": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        14
+                    ],
+                    "type": "added"
+                },
+                "7": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        15
+                    ],
+                    "type": "added"
+                },
+                "8": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        17
+                    ],
+                    "type": "added"
+                },
+                "9": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        18
+                    ],
+                    "type": "added"
+                },
+                "10": {
+                    "recalled_ids": [
+                        6
+                    ],
+                    "retold_ids": [
+                        18
+                    ],
+                    "type": "match"
+                },
+                "11": {
+                    "recalled_ids": [
+                        9
+                    ],
+                    "retold_ids": [
+                        19
+                    ],
+                    "type": "match"
+                },
+                "12": {
+                    "recalled_ids": [
+                        10
+                    ],
+                    "retold_ids": [
+                        20
+                    ],
+                    "type": "match"
+                }
+            }
+        }
+    ],
+    "3XUHV3NRVLKPOFN2YRCMOEUYH6HH5J": [
+        {
+            "record": {
+                "recalled": {
+                    "2": {
+                        "end": 62,
+                        "start": 0,
+                        "text": "I went on a canoe float last weekend with my husband and kids."
+                    },
+                    "3": {
+                        "end": 242,
+                        "start": 228,
+                        "text": " He went along"
+                    },
+                    "4": {
+                        "end": 354,
+                        "start": 277,
+                        "text": "My dad is a lot of fun and made the bus ride to the drop off point memorable."
+                    },
+                    "5": {
+                        "end": 387,
+                        "start": 355,
+                        "text": "Everyone on the bus was laughing"
+                    },
+                    "6": {
+                        "end": 472,
+                        "start": 412,
+                        "text": "People were saying that they wanted to float with our group "
+                    },
+                    "7": {
+                        "end": 565,
+                        "start": 515,
+                        "text": "people would see us and yell out to him \"Grandpa!\""
+                    },
+                    "8": {
+                        "end": 589,
+                        "start": 566,
+                        "text": "Everyone remembered him"
+                    },
+                    "9": {
+                        "end": 686,
+                        "start": 645,
+                        "text": "He would say something funny back to them"
+                    },
+                    "10": {
+                        "end": 996,
+                        "start": 966,
+                        "text": "I don't remember a float trip."
+                    },
+                    "11": {
+                        "end": 1030,
+                        "start": 1013,
+                        "text": "My kids got quiet"
+                    },
+                    "12": {
+                        "end": 1079,
+                        "start": 1032,
+                        "text": "Everyone realized how bad his memory has become"
+                    },
+                    "26": {
+                        "end": 915,
+                        "start": 836,
+                        "text": "we were reminiscing about all of the fun things that happened on the float trip"
+                    }
+                },
+                "retold": {
+                    "13": {
+                        "end": 55,
+                        "start": 0,
+                        "text": "We went on a float trip with my dad and my kids grandpa"
+                    },
+                    "14": {
+                        "end": 230,
+                        "start": 117,
+                        "text": "The ride to the drop off point was a lot of fun and many people on the bus were enjoying my dad's sense of humor."
+                    },
+                    "15": {
+                        "end": 264,
+                        "start": 231,
+                        "text": "Everyone was calling him grandpa."
+                    },
+                    "16": {
+                        "end": 342,
+                        "start": 265,
+                        "text": "People were saying that they wanted to float along with us on the float trip."
+                    },
+                    "17": {
+                        "end": 419,
+                        "start": 344,
+                        "text": "ome parts of the float were a little hard when the water was moving swiftly"
+                    },
+                    "18": {
+                        "end": 457,
+                        "start": 424,
+                        "text": "we got caught up in downed trees,"
+                    },
+                    "19": {
+                        "end": 578,
+                        "start": 532,
+                        "text": "people from the bus would yell out \"Grandpa!!\""
+                    },
+                    "20": {
+                        "end": 632,
+                        "start": 583,
+                        "text": "my dad would wave to them and say something funny"
+                    },
+                    "22": {
+                        "end": 1036,
+                        "start": 956,
+                        "text": "He does have a hard time remembering things or following conversations sometimes"
+                    },
+                    "23": {
+                        "end": 1208,
+                        "start": 1091,
+                        "text": "He was having a lot of fun and was also really good at steering the canoe and telling the person in front how to help"
+                    },
+                    "24": {
+                        "end": 1342,
+                        "start": 1246,
+                        "text": "we were talking about how much fun we had and discussing some of the funny stories from the trip"
+                    },
+                    "25": {
+                        "end": 1510,
+                        "start": 1442,
+                        "text": "He was very much in shock when we were telling him what had happened"
+                    },
+                    "27": {
+                        "end": 1655,
+                        "start": 1558,
+                        "text": "it especially hit my kids really hard because they really didn't know how ugly Alzheimer's can be"
+                    }
+                }
+            },
+            "relation": {
+                "1": {
+                    "recalled_ids": [
+                        2,
+                        3
+                    ],
+                    "retold_ids": [
+                        13
+                    ],
+                    "type": "match"
+                },
+                "2": {
+                    "recalled_ids": [
+                        4,
+                        5
+                    ],
+                    "retold_ids": [
+                        14
+                    ],
+                    "type": "match"
+                },
+                "3": {
+                    "recalled_ids": [
+                        6
+                    ],
+                    "retold_ids": [
+                        16
+                    ],
+                    "type": "match"
+                },
+                "4": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        17
+                    ],
+                    "type": "added"
+                },
+                "5": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        18
+                    ],
+                    "type": "added"
+                },
+                "7": {
+                    "recalled_ids": [
+                        9
+                    ],
+                    "retold_ids": [
+                        20
+                    ],
+                    "type": "match"
+                },
+                "8": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        22
+                    ],
+                    "type": "added"
+                },
+                "9": {
+                    "recalled_ids": [],
+                    "retold_ids": [
+                        23
+                    ],
+                    "type": "added"
+                },
+                "10": {
+                    "recalled_ids": [
+                        26
+                    ],
+                    "retold_ids": [
+                        24
+                    ],
+                    "type": "match"
+                },
+                "11": {
+                    "recalled_ids": [
+                        10
+                    ],
+                    "retold_ids": [
+                        25
+                    ],
+                    "type": "match"
+                },
+                "12": {
+                    "recalled_ids": [
+                        11
+                    ],
+                    "retold_ids": [
+                        27
+                    ],
+                    "type": "match"
+                },
+                "13": {
+                    "recalled_ids": [
+                        7
+                    ],
+                    "retold_ids": [
+                        15,
+                        19
+                    ],
+                    "type": "match"
+                }
+            }
+        }
+    ]
+}
