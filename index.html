@@ -17,8 +17,8 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
                 crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.9/relation.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.9/span_label.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/relation.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/span_label.min.js"></script>
             <!-- <script src="relation.js"></script> -->
             <!-- <script src="span_label.js"></script> -->
             <style>
@@ -73,9 +73,9 @@
                 <div id="span_labeling" style="display: none;">
                     <div style="text-align: justify;">
                         <h4 style="text-align: center;padding: 8px;">Summary</h4>
-                        A medical emergency for hypoglecimic diabetic from a low blood sugar crash. A strange fourth of
-                        July for 2019 that was
-                        quite memorable to myself and my husband.
+                        This story is about a canoe float with grandpa. We had a great float trip with my dad but were
+                        saddened to realize how
+                        bad his Alzheimer's really is.
                     </div>
                     <table class='table'>
                         <tr>
@@ -85,12 +85,10 @@
                         </tr>
                         <tbody style="border-color: black;">
                             <tr>
-                                <td id='recalled' style="text-align: justify;"
-                                    data-text="I am a type 2 diabetic. When I went in to see my doctor in June she decided that my A1c was not low enough even though it was in the low 7s which I thought was great. My doctor said it should really be around 6 because higher A1c's lead to more problems down the road for diabetics. I take something besides insulin to help regulate diabetes. it's called Metfornin.  Metfornin is very typical and it's commonly used for diabetic patients to help regulate blood sugars. I have been taking Metfornin for 14 years since I had been determined to be a diabetic. The doctor increased my dosage of this drug to 3 daily instead of 2 which I did not think was a very big deal, I mean I had taken them for years with absolutely no problems.  I started getting sick, I thought it was taking blood pressure medicine.  I had ran out of blood pressure medicine about 2 weeks before I went to see my doctor. After I started taking the additional Metfornin I also started taking my blood pressure medicine and started having side effects like nausea and dizziness. I thought I had contracted the flu or blamed it on the blood pressure medicine. I was horribly ill and passed out after waking up on the 4th. I woke up in the hospital on July 4th.  My sugar had crashed from taking too much of this drug and my husband wasn't sure what to do, so he rushed me to the emergency room. I woke up after having been given a glucose drip.">
+                                <td id='recalled' style="text-align: justify;">
                                 </td>
                                 <td></td>
-                                <td id='retold' style="text-align: justify;"
-                                    data-text="It was a sobering reminder that I had to take care of myself. My doctor who thought my A1c level was too high instructed me to increase one of my medications. I hadn't been feeling well the last week but I hadn't thought that it was increasing one of my pills daily that was making me sick. I had been taking this prescribed medicine for 13 years. I had gotten up to go to work and I know my sugar was running low. I tested and it was indeed low, but was still really tired. I decided to go back to bed since it was July 4th and I did not have to go to work. I didn't take any precautions like eating a carb or two to bring my sugar up. I went to bed and that was about the last thing that I remember. The next thing I do remember I woke up in the hospital in a bed with an IV in my arm. My sugar had been 33 when I had been brought in, which was almost coma level. I guess from what my husband said, I got up a while later and was acting screwy-if a person hasn't seen a hypoglycemic episode they might think the person was drunk. I guess I got up then fell in the bathroom, my husband came in and talked to me and said I wasn't making any sense. He finally got me up and then I walked to the living room and passed out on the floor. He finally got me up and dressed. Then he rushed me to the hospital because he was not sure of what to do.">
+                                <td id='retold' style="text-align: justify;">
                                 </td>
                             </tr>
                             <tr>
@@ -203,6 +201,15 @@
                 }
                 return true;
             }
+            $(document).ready(() => {
+                document.querySelector("#recalled").dataset.text = `I went on a canoe float last weekend with my husband and kids. My dad who is in the beginning stages of Alzheimer's wanted to go with us too. I was a little surprised because in the past he never wanted to do anything like that. He went along and we actually had a great time. My dad is a lot of fun and made the bus ride to the drop off point memorable. Everyone on the bus was laughing and having a good time. People were saying that they wanted to float with our group because he was so much fun. As we floated, people would see us and yell out to him "Grandpa!" Everyone remembered him from the bus and was having such a good time with him. He would say something funny back to them and we would continue floating. It was a really great day and I'm glad my kids got to enjoy it with him. The saddest point came when on the way home we were reminiscing about all of the fun things that happened on the float trip. My dad said "Float trip? I went on a float trip? I don't remember a float trip." It was so sad. My kids got quiet. Everyone realized how bad his memory has become.`;
+                document.querySelector("#retold").dataset.text = `We went on a float trip with my dad and my kids grandpa. We had a really good time. There were 7 of us all together. The ride to the drop off point was a lot of fun and many people on the bus were enjoying my dad's sense of humor. Everyone was calling him grandpa. People were saying that they wanted to float along with us on the float trip. Some parts of the float were a little hard when the water was moving swiftly and we got caught up in downed trees, but for the most part, we had a great time. As we floated down the river, people from the bus would yell out "Grandpa!!" and my dad would wave to them and say something funny. It was really a nice day and all of my kids had a lot of fun. My dad has been showing signs of Alzheimer's lately. The disease runs in his family with most of his aunts, uncles, and his mom all having it. I've always figured that one day he would be dealing with it too, but always hoped that it wouldn't attack him also. He does have a hard time remembering things or following conversations sometimes, but on the float trip, he really seemed pretty good. He was having a lot of fun and was also really good at steering the canoe and telling the person in front how to help. On the way home from the float trip we were talking about how much fun we had and discussing some of the funny stories from the trip. When we were talking about it, my dad didn't even know that he had gone on a float trip that day. He was very much in shock when we were telling him what had happened. He couldn't believe it. It was really sad and it especially hit my kids really hard because they really didn't know how ugly Alzheimer's can be.`;
+                let story_blocks = ["#recalled", "#retold"];
+                story_blocks.forEach((story_type) => {
+                    let e = $(story_type)[0];
+                    e.innerHTML = e.dataset.text;
+                });
+            });
         </script>
 </body>
 
