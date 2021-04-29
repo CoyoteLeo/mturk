@@ -17,8 +17,8 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
                 crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/relation.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/span_label.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.11/relation.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.11/span_label.min.js"></script>
             <!-- <script src="relation.js"></script> -->
             <!-- <script src="span_label.js"></script> -->
             <style>
@@ -183,34 +183,34 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <script>
-            function validate_submit() {
-                const retold_ids = new Set(Object.keys(record.retold).map(x => parseInt(x)));
-                let tagged_ids = new Set();
-                for (const id in relations) {
-                    for (const i in relations[id]['retold_ids']) {
-                        tagged_ids = tagged_ids.add(parseInt(relations[id]['retold_ids'][i]));
+            <script>
+                function validate_submit() {
+                    const retold_ids = new Set(Object.keys(record.retold).map(x => parseInt(x)));
+                    let tagged_ids = new Set();
+                    for (const id in relations) {
+                        for (const i in relations[id]['retold_ids']) {
+                            tagged_ids = tagged_ids.add(parseInt(relations[id]['retold_ids'][i]));
+                        }
                     }
+                    tagged_ids = Array.from(tagged_ids);
+                    const lack_ids = Array.from(retold_ids).filter(x => !tagged_ids.includes(x));
+                    if ((lack_ids).length != 0) {
+                        alert(`All span ids of retold story should be tagged with a relation, ${JSON.stringify(lack_ids)}`);
+                        return false;
+                    }
+                    return true;
                 }
-                tagged_ids = Array.from(tagged_ids);
-                const lack_ids = Array.from(retold_ids).filter(x => !tagged_ids.includes(x));
-                if ((lack_ids).length != 0) {
-                    alert(`All span ids of retold story should be tagged with a relation, ${JSON.stringify(lack_ids)}`);
-                    return false;
-                }
-                return true;
-            }
-            $(document).ready(() => {
-                document.querySelector("#recalled").dataset.text = `I went on a canoe float last weekend with my husband and kids. My dad who is in the beginning stages of Alzheimer's wanted to go with us too. I was a little surprised because in the past he never wanted to do anything like that. He went along and we actually had a great time. My dad is a lot of fun and made the bus ride to the drop off point memorable. Everyone on the bus was laughing and having a good time. People were saying that they wanted to float with our group because he was so much fun. As we floated, people would see us and yell out to him "Grandpa!" Everyone remembered him from the bus and was having such a good time with him. He would say something funny back to them and we would continue floating. It was a really great day and I'm glad my kids got to enjoy it with him. The saddest point came when on the way home we were reminiscing about all of the fun things that happened on the float trip. My dad said "Float trip? I went on a float trip? I don't remember a float trip." It was so sad. My kids got quiet. Everyone realized how bad his memory has become.`;
-                document.querySelector("#retold").dataset.text = `We went on a float trip with my dad and my kids grandpa. We had a really good time. There were 7 of us all together. The ride to the drop off point was a lot of fun and many people on the bus were enjoying my dad's sense of humor. Everyone was calling him grandpa. People were saying that they wanted to float along with us on the float trip. Some parts of the float were a little hard when the water was moving swiftly and we got caught up in downed trees, but for the most part, we had a great time. As we floated down the river, people from the bus would yell out "Grandpa!!" and my dad would wave to them and say something funny. It was really a nice day and all of my kids had a lot of fun. My dad has been showing signs of Alzheimer's lately. The disease runs in his family with most of his aunts, uncles, and his mom all having it. I've always figured that one day he would be dealing with it too, but always hoped that it wouldn't attack him also. He does have a hard time remembering things or following conversations sometimes, but on the float trip, he really seemed pretty good. He was having a lot of fun and was also really good at steering the canoe and telling the person in front how to help. On the way home from the float trip we were talking about how much fun we had and discussing some of the funny stories from the trip. When we were talking about it, my dad didn't even know that he had gone on a float trip that day. He was very much in shock when we were telling him what had happened. He couldn't believe it. It was really sad and it especially hit my kids really hard because they really didn't know how ugly Alzheimer's can be.`;
-                let story_blocks = ["#recalled", "#retold"];
-                story_blocks.forEach((story_type) => {
-                    let e = $(story_type)[0];
-                    e.innerHTML = e.dataset.text;
+                $(document).ready(() => {
+                    document.querySelector("#recalled").dataset.text = `I went on a canoe float last weekend with my husband and kids. My dad who is in the beginning stages of Alzheimer's wanted to go with us too. I was a little surprised because in the past he never wanted to do anything like that. He went along and we actually had a great time. My dad is a lot of fun and made the bus ride to the drop off point memorable. Everyone on the bus was laughing and having a good time. People were saying that they wanted to float with our group because he was so much fun. As we floated, people would see us and yell out to him "Grandpa!" Everyone remembered him from the bus and was having such a good time with him. He would say something funny back to them and we would continue floating. It was a really great day and I'm glad my kids got to enjoy it with him. The saddest point came when on the way home we were reminiscing about all of the fun things that happened on the float trip. My dad said "Float trip? I went on a float trip? I don't remember a float trip." It was so sad. My kids got quiet. Everyone realized how bad his memory has become.`;
+                    document.querySelector("#retold").dataset.text = `We went on a float trip with my dad and my kids grandpa. We had a really good time. There were 7 of us all together. The ride to the drop off point was a lot of fun and many people on the bus were enjoying my dad's sense of humor. Everyone was calling him grandpa. People were saying that they wanted to float along with us on the float trip. Some parts of the float were a little hard when the water was moving swiftly and we got caught up in downed trees, but for the most part, we had a great time. As we floated down the river, people from the bus would yell out "Grandpa!!" and my dad would wave to them and say something funny. It was really a nice day and all of my kids had a lot of fun. My dad has been showing signs of Alzheimer's lately. The disease runs in his family with most of his aunts, uncles, and his mom all having it. I've always figured that one day he would be dealing with it too, but always hoped that it wouldn't attack him also. He does have a hard time remembering things or following conversations sometimes, but on the float trip, he really seemed pretty good. He was having a lot of fun and was also really good at steering the canoe and telling the person in front how to help. On the way home from the float trip we were talking about how much fun we had and discussing some of the funny stories from the trip. When we were talking about it, my dad didn't even know that he had gone on a float trip that day. He was very much in shock when we were telling him what had happened. He couldn't believe it. It was really sad and it especially hit my kids really hard because they really didn't know how ugly Alzheimer's can be.`;
+                    let story_blocks = ["#recalled", "#retold"];
+                    story_blocks.forEach((story_type) => {
+                        let e = $(story_type)[0];
+                        e.innerHTML = e.dataset.text;
+                    });
                 });
-            });
-        </script>
+            </script>
+        </div>
 </body>
 
 </html>
