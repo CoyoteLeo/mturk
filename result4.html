@@ -426,7 +426,7 @@
                     relation_type = r['type']
                     recalled_table = build_html(r['recalled_ids'], record.recalled);
                     retold_table = build_html(r['retold_ids'], record.retold);
-                    tr.innerHTML = `<td>${relation_type}</td><td>${recalled_table}</td><td>${retold_table}</td><td><button type="button" class="btn btn-sm btn-danger" style="background-color: #dc3545"onclick=delete_relation(${relation_counter})>X</button></td>`;
+                    tr.innerHTML = `<td>${relation_type}</td><td>${recalled_table}</td><td>${retold_table}</td><td><button type="button" class="btn btn-sm btn-danger" style="background-color: #dc3545"onclick=delete_relation(${id})>X</button></td>`;
                     table.append(tr);
                     relations[relation_counter] = {
                         type: relation_type,
