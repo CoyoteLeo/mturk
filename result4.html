@@ -185,19 +185,32 @@
             </div>
         </div>
         <script>
-            function validate_submit() {
-                const retold_ids = new Set(Object.keys(record.retold).map(x => parseInt(x)));
+            check_recalled = false;
+            function validate_result(type, error) {
+                const ids = new Set(Object.keys(record[type]).map(x => parseInt(x)));
                 let tagged_ids = new Set();
+                let key = type + "_ids"
                 for (const id in relations) {
-                    for (const i in relations[id]['retold_ids']) {
-                        tagged_ids = tagged_ids.add(parseInt(relations[id]['retold_ids'][i]));
+                    for (const i in relations[id][key]) {
+                        tagged_ids = tagged_ids.add(parseInt(relations[id][key][i]));
                     }
                 }
                 tagged_ids = Array.from(tagged_ids);
-                const lack_ids = Array.from(retold_ids).filter(x => !tagged_ids.includes(x));
+                const lack_ids = Array.from(ids).filter(x => !tagged_ids.includes(x));
                 if ((lack_ids).length != 0) {
-                    alert(`All span ids of retold story should be tagged with a relation, ${JSON.stringify(lack_ids)}`);
+                    alert(`${error}, ids: ${JSON.stringify(lack_ids)}`);
                     return false;
+                }
+                return true;
+            }
+            function validate_submit() {
+                let retold_result = validate_result("retold", "All span ids of retold story should be tagged with a relation")
+                if (!retold_result)
+                    return false;
+                if (!check_recalled) {
+                    const recalled_result = validate_result("recalled", "These ids of recalled spans aren't be tagged, please check it(you may keep the result, it's fine), and submit again")
+                    check_recalled = true;
+                    return recalled_result
                 }
                 return true;
             }
