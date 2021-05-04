@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <div class="ui container">
+        <div id="experiment" class="ui top aligned centered relaxed grid">
+            <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/mark.js/8.6.0/mark.min.js"></script>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+                crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+                crossorigin="anonymous"></script>
+            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/relation.min.js"></script> -->
+            <!-- <script src="https://cdn.jsdelivr.net/gh/CoyoteLeo/mturk@v0.10/span_label.min.js"></script> -->
+            <script src="relation.min.js"></script>
+            <script src="span_label.min.js"></script>
+            <style>
+                .flex-container {
+                    display: flex;
+                    flex-direction: row;
+                    margin-top: 30px;
+                    justify-content: space-between;
+                }
+
+                .flex-item {
+                    text-align: justify;
+                    width: 48%;
+                }
+
+                [class*="retold_mark"] {
+                    background: lightgreen;
+                    padding: .1em;
+                }
+
+                [class*="recalled_mark"] {
+                    background: lightskyblue;
+                    padding: .1em;
+                }
+
+                table {
+                    table-layout: fixed;
+                }
+
+                .result {
+                    margin-top: 50px;
+                }
+
+                tr>td {
+                    vertical-align: baseline;
+                }
+
+                h3 {
+                    margin-top: 30px;
+                }
+
+                input,
+                select {
+                    width: 100%;
+                }
+            </style>
+            <div style="text-align: center; margin:30px auto 200px auto">
+                <a id='instruction_btn' href="https://coyoteleo.github.io/mturk/instruction.html"
+                    class="btn btn-primary" target="_blank" onclick="start_span_labeling()">View instructions before
+                    labeling</a>
+                <hr>
+                <div id="span_labeling">
+                    <div style="text-align: justify;">
+                        <h4 style="text-align: center;padding: 8px;">Summary</h4>
+                        This story is about a canoe float with grandpa. We had a great float trip with my dad but were
+                        saddened to realize how
+                        bad his Alzheimer's really is.
+                    </div>
+                    <table class='table'>
+                        <tr>
+                            <th style="width: 50%;">Recalled story</th>
+                            <th style="width: 10px;"></th>
+                            <th style="width: 50%;">Retold story</th>
+                        </tr>
+                        <tbody style="border-color: black;">
+                            <tr>
+                                <td id='recalled' style="text-align: justify;">
+                                </td>
+                                <td></td>
+                                <td id='retold' style="text-align: justify;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id='recalled_result' class='result'></td>
+                                <td></td>
+                                <td id='retold_result' class='result'></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button id='relation_btn' class="btn btn-primary" type="button" onclick="start_relation_tagging()"
+                    style="display: none;">Start Relation Tagging</button>
+                <div id="relation_labeling">
+                    <div id='pair_form' novalidate style="width: 80%;margin: auto;">
+                        <h4>Relation Result</h4>
+                        <table class='table table-bordered'>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 130px;">Type</th>
+                                    <th scope="col" style="calc(50% - 105px)">recalled IDs</th>
+                                    <th scope="col" style="calc(50% - 105px)">retold IDs</th>
+                                    <th scope="col" style="width: 80px;">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id='relation_result'>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div novalidate
+                        style="width: 70%;z-index: 999;position: fixed;bottom: 5px;background: white;border: 2px black solid;left: 0;right: 0;margin: auto">
+                        <table class='table'>
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 130px;">Type</th>
+                                    <th scope="col" style="calc(50% - 105px)">recalled IDs</th>
+                                    <th scope="col" style="calc(50% - 105px)">retold IDs</th>
+                                    <th scope="col" style="width: 80px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="has-validation">
+                                            <select id="type_selection" class="form-select"
+                                                onchange="validate_relation()">
+                                                <option disabled selected>--</option>
+                                                <option value="match">Match</option>
+                                                <option value="conflict">Conflict</option>
+                                                <option value="added">Added</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please select a valid type.</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="has-validation">
+                                            <input id="recalled_ids" type="text" class="form-control"
+                                                pattern="^\d+(,\d+)*$" placeholder="e.g. 1,2,5" data-id-type='recalled'
+                                                oninput="validate_relation()">
+                                            <div class="invalid-feedback">Please fill the field with the correct
+                                                pattern.</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="has-validation">
+                                            <input id="retold_ids" type="text" class="form-control"
+                                                pattern="^\d+(,\d+)*$" placeholder="e.g. 1,2,5" data-id-type='retold'
+                                                oninput="validate_relation()">
+                                            <div class="invalid-feedback">Please fill the field with the correct
+                                                pattern.</div>
+                                        </div>
+                                    </td>
+                                    <td><button type="button" class="btn btn-sm btn-success"
+                                            style="background-color: #198754" onclick="add_relation()">Added</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <crowd-form onsubmit="return validate_submit()">
+                            <crowd-text-area id="final_id" name="id" rows="4" style="display: none;">${recAgnPairId}
+                            </crowd-text-area>
+                            <crowd-text-area id="final_record" name="record" rows="4" style="display: none;">
+                            </crowd-text-area>
+                            <crowd-text-area id="final_relation" name="relation" rows="4" style="display: none;">
+                            </crowd-text-area>
+                            <h4>Opinion</h4>
+                            <crowd-text-area id="opinion" name="opinion"
+                                placeholder='There are something strange in the articles, ex: two article are totally different. '>
+                            </crowd-text-area>
+                        </crowd-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            check_recalled = false;
+            function validate_result(type, error) {
+                const ids = new Set(Object.keys(record[type]).map(x => parseInt(x)));
+                let tagged_ids = new Set();
+                let key = type + "_ids"
+                for (const id in relations) {
+                    for (const i in relations[id][key]) {
+                        tagged_ids = tagged_ids.add(parseInt(relations[id][key][i]));
+                    }
+                }
+                tagged_ids = Array.from(tagged_ids);
+                const lack_ids = Array.from(ids).filter(x => !tagged_ids.includes(x));
+                if ((lack_ids).length != 0) {
+                    alert(`${error}, ids: ${JSON.stringify(lack_ids)}`);
+                    return false;
+                }
+                return true;
+            }
+            function validate_submit() {
+                let retold_result = validate_result("retold", "All span ids of retold story should be tagged with a relation")
+                if (!retold_result)
+                    return false;
+                if (!check_recalled) {
+                    const recalled_result = validate_result("recalled", "These ids of recalled spans aren't be tagged, please check it(you may keep the result, it's fine), and submit again")
+                    check_recalled = true;
+                    return recalled_result
+                }
+                return true;
+            }
+            $(document).ready(() => {
+                const result = [
+                    {
+                        "record": {
+                            "recalled": {
+                                "11": {
+                                    "end": 1030,
+                                    "start": 1013,
+                                    "text": "My kids got quiet"
+                                },
+                                "12": {
+                                    "end": 1079,
+                                    "start": 1032,
+                                    "text": "Everyone realized how bad his memory has become"
+                                },
+                                "2": {
+                                    "end": 62,
+                                    "start": 0,
+                                    "text": "I went on a canoe float last weekend with my husband and kids."
+                                },
+                                "26": {
+                                    "end": 915,
+                                    "start": 836,
+                                    "text": "we were reminiscing about all of the fun things that happened on the float trip"
+                                },
+                                "28": {
+                                    "end": 997,
+                                    "start": 917,
+                                    "text": "My dad said \"Float trip? I went on a float trip? I don't remember a float trip.\""
+                                },
+                                "3": {
+                                    "end": 242,
+                                    "start": 228,
+                                    "text": " He went along"
+                                },
+                                "30": {
+                                    "end": 513,
+                                    "start": 503,
+                                    "text": "we floated"
+                                },
+                                "4": {
+                                    "end": 354,
+                                    "start": 277,
+                                    "text": "My dad is a lot of fun and made the bus ride to the drop off point memorable."
+                                },
+                                "5": {
+                                    "end": 387,
+                                    "start": 355,
+                                    "text": "Everyone on the bus was laughing"
+                                },
+                                "6": {
+                                    "end": 472,
+                                    "start": 412,
+                                    "text": "People were saying that they wanted to float with our group "
+                                },
+                                "7": {
+                                    "end": 565,
+                                    "start": 515,
+                                    "text": "people would see us and yell out to him \"Grandpa!\""
+                                },
+                                "8": {
+                                    "end": 589,
+                                    "start": 566,
+                                    "text": "Everyone remembered him"
+                                },
+                                "9": {
+                                    "end": 686,
+                                    "start": 645,
+                                    "text": "He would say something funny back to them"
+                                }
+                            },
+                            "retold": {
+                                "13": {
+                                    "end": 55,
+                                    "start": 0,
+                                    "text": "We went on a float trip with my dad and my kids grandpa"
+                                },
+                                "14": {
+                                    "end": 230,
+                                    "start": 117,
+                                    "text": "The ride to the drop off point was a lot of fun and many people on the bus were enjoying my dad's sense of humor."
+                                },
+                                "15": {
+                                    "end": 264,
+                                    "start": 231,
+                                    "text": "Everyone was calling him grandpa."
+                                },
+                                "16": {
+                                    "end": 342,
+                                    "start": 265,
+                                    "text": "People were saying that they wanted to float along with us on the float trip."
+                                },
+                                "18": {
+                                    "end": 457,
+                                    "start": 424,
+                                    "text": "we got caught up in downed trees,"
+                                },
+                                "19": {
+                                    "end": 578,
+                                    "start": 532,
+                                    "text": "people from the bus would yell out \"Grandpa!!\""
+                                },
+                                "20": {
+                                    "end": 632,
+                                    "start": 583,
+                                    "text": "my dad would wave to them and say something funny"
+                                },
+                                "22": {
+                                    "end": 1036,
+                                    "start": 956,
+                                    "text": "He does have a hard time remembering things or following conversations sometimes"
+                                },
+                                "23": {
+                                    "end": 1208,
+                                    "start": 1091,
+                                    "text": "He was having a lot of fun and was also really good at steering the canoe and telling the person in front how to help"
+                                },
+                                "24": {
+                                    "end": 1342,
+                                    "start": 1246,
+                                    "text": "we were talking about how much fun we had and discussing some of the funny stories from the trip"
+                                },
+                                "25": {
+                                    "end": 1510,
+                                    "start": 1442,
+                                    "text": "He was very much in shock when we were telling him what had happened"
+                                },
+                                "29": {
+                                    "end": 530,
+                                    "start": 505,
+                                    "text": "we floated down the river"
+                                }
+                            }
+                        },
+                        "relation": {
+                            "1": {
+                                "recalled_ids": [
+                                    2,
+                                    3
+                                ],
+                                "retold_ids": [
+                                    13
+                                ],
+                                "type": "match"
+                            },
+                            "10": {
+                                "recalled_ids": [
+                                    26
+                                ],
+                                "retold_ids": [
+                                    24
+                                ],
+                                "type": "match"
+                            },
+                            "13": {
+                                "recalled_ids": [
+                                    7
+                                ],
+                                "retold_ids": [
+                                    15,
+                                    19
+                                ],
+                                "type": "match"
+                            },
+                            "14": {
+                                "recalled_ids": [
+                                    28
+                                ],
+                                "retold_ids": [
+                                    25
+                                ],
+                                "type": "match"
+                            },
+                            "15": {
+                                "recalled_ids": [
+                                    30
+                                ],
+                                "retold_ids": [
+                                    29
+                                ],
+                                "type": "match"
+                            },
+                            "2": {
+                                "recalled_ids": [
+                                    4,
+                                    5
+                                ],
+                                "retold_ids": [
+                                    14
+                                ],
+                                "type": "match"
+                            },
+                            "3": {
+                                "recalled_ids": [
+                                    6
+                                ],
+                                "retold_ids": [
+                                    16
+                                ],
+                                "type": "match"
+                            },
+                            "4": {
+                                "recalled_ids": [
+                                ],
+                                "retold_ids": [
+                                    17
+                                ],
+                                "type": "added"
+                            },
+                            "5": {
+                                "recalled_ids": [
+                                ],
+                                "retold_ids": [
+                                    18
+                                ],
+                                "type": "added"
+                            },
+                            "6": {
+                                "recalled_ids": [
+                                    9
+                                ],
+                                "retold_ids": [
+                                    20
+                                ],
+                                "type": "match"
+                            },
+                            "8": {
+                                "recalled_ids": [
+                                ],
+                                "retold_ids": [
+                                    22
+                                ],
+                                "type": "added"
+                            },
+                            "9": {
+                                "recalled_ids": [
+                                ],
+                                "retold_ids": [
+                                    23
+                                ],
+                                "type": "added"
+                            }
+                        }
+                    }
+                ][0]
+                document.querySelector("#recalled").dataset.text = `I went on a canoe float last weekend with my husband and kids. My dad who is in the beginning stages of Alzheimer's wanted to go with us too. I was a little surprised because in the past he never wanted to do anything like that. He went along and we actually had a great time. My dad is a lot of fun and made the bus ride to the drop off point memorable. Everyone on the bus was laughing and having a good time. People were saying that they wanted to float with our group because he was so much fun. As we floated, people would see us and yell out to him "Grandpa!" Everyone remembered him from the bus and was having such a good time with him. He would say something funny back to them and we would continue floating. It was a really great day and I'm glad my kids got to enjoy it with him. The saddest point came when on the way home we were reminiscing about all of the fun things that happened on the float trip. My dad said "Float trip? I went on a float trip? I don't remember a float trip." It was so sad. My kids got quiet. Everyone realized how bad his memory has become.`;
+                document.querySelector("#retold").dataset.text = `We went on a float trip with my dad and my kids grandpa. We had a really good time. There were 7 of us all together. The ride to the drop off point was a lot of fun and many people on the bus were enjoying my dad's sense of humor. Everyone was calling him grandpa. People were saying that they wanted to float along with us on the float trip. Some parts of the float were a little hard when the water was moving swiftly and we got caught up in downed trees, but for the most part, we had a great time. As we floated down the river, people from the bus would yell out "Grandpa!!" and my dad would wave to them and say something funny. It was really a nice day and all of my kids had a lot of fun. My dad has been showing signs of Alzheimer's lately. The disease runs in his family with most of his aunts, uncles, and his mom all having it. I've always figured that one day he would be dealing with it too, but always hoped that it wouldn't attack him also. He does have a hard time remembering things or following conversations sometimes, but on the float trip, he really seemed pretty good. He was having a lot of fun and was also really good at steering the canoe and telling the person in front how to help. On the way home from the float trip we were talking about how much fun we had and discussing some of the funny stories from the trip. When we were talking about it, my dad didn't even know that he had gone on a float trip that day. He was very much in shock when we were telling him what had happened. He couldn't believe it. It was really sad and it especially hit my kids really hard because they really didn't know how ugly Alzheimer's can be.`;
+                let story_blocks = ["#recalled", "#retold"];
+                story_blocks.forEach((story_type) => {
+                    let e = $(story_type)[0];
+                    e.innerHTML = e.dataset.text;
+                    const t = story_type.substr(1);
+                    l = result['record'][t];
+                    for (const id in l) {
+                        add_span(e, l[id]['text'], parseInt(id));
+                    }
+                });
+                let table = document.querySelector("#relation_result");
+                l = result['relation'];
+                for (const id in l) {
+                    r = l[id];
+                    tr = document.createElement("tr");
+                    tr.id = `relation${id}`;
+                    relation_type = r['type']
+                    recalled_table = build_html(r['recalled_ids'], record.recalled);
+                    retold_table = build_html(r['retold_ids'], record.retold);
+                    tr.innerHTML = `<td>${relation_type}</td><td>${recalled_table}</td><td>${retold_table}</td><td><button type="button" class="btn btn-sm btn-danger" style="background-color: #dc3545"onclick=delete_relation(${id})>X</button></td>`;
+                    table.append(tr);
+                    relations[relation_counter] = {
+                        type: relation_type,
+                        recalled_ids: r['recalled_ids'],
+                        retold_ids: r['retold_ids'],
+                    };
+                    document.querySelector("#final_relation").value = relations;
+                    relation_counter = parseInt(id) + 1;
+                }
+
+
+            });
+        </script>
+</body>
+
+</html>
